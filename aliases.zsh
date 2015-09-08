@@ -1,4 +1,10 @@
 ccdf=$HOME/.cc_dotfiles
+
+# global
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+
 # PS
 alias psa="ps aux"
 alias psg="ps aux | grep "

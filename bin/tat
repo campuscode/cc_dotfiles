@@ -1,5 +1,6 @@
 #!/bin/sh
 #
+# https://github.com/thoughtbot/dotfiles/blob/master/bin/tat
 # Attach or create tmux session named the same as current directory.
 
 path_name="$(basename "$PWD" | tr . -)"

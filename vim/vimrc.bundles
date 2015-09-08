@@ -5,6 +5,7 @@ end
 call plug#begin('~/.vim/bundle')
 
 " Define bundles via Github repos
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-run-interactive'
 Plug 'skwp/vim-colors-solarized'
 Plug 'scrooloose/nerdtree'
@@ -18,6 +19,7 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -27,7 +29,7 @@ Plug 'chrisbra/color_highlight'
 Plug 'jby/tmux.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'rking/ag.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
