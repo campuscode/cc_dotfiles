@@ -1,5 +1,5 @@
 " Switch between the last two files
-nnoremap <leader><leader> <c-^>
+nnoremap <Leader><Leader> <c-^>
 
 " vim-rspec mappings
 nnoremap <Leader>rs :call RunCurrentSpecFile()<CR>
@@ -38,21 +38,21 @@ nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 " vim reload
-nmap <silent> <leader>vr :so %<CR>
+nmap <silent> <Leader>vr :so %<CR>
 
 " Type ,hl to toggle highlighting on/off, and show current value.
-noremap <leader>hl :set hlsearch! hlsearch?<CR>
+noremap <Leader>hl :set hlsearch! hlsearch?<CR>
 
 " Remapping CtrlP
-nnoremap <silent> <leader>t :CtrlP<CR>
-let g:ctrlp_map = ' t'
+" let g:ctrlp_map = ' t'
+nnoremap <silent> <Leader>t :CtrlP<CR>
 
 " zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
+nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <Leader>= :wincmd =<cr>
 
 "" Tabs
 nnoremap <S-Tab> gt
 nnoremap <silent> <S-t> :tabnew<CR>
 
-map <leader>ru :call VtrSendCommand('rubocop')<CR>
+map <Leader>ru :call VtrSendCommand('rubocop')<CR>

@@ -58,6 +58,8 @@ bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
 bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
+set -o nobeep # no annoying beeps
+
 # aliases
 [[ -f ~/.aliases.zsh ]] && source ~/.aliases.zsh
 
@@ -70,3 +72,6 @@ TERM=screen-256color
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# Your secrets env var
+[[ -f ~/.secrets ]] && source ~/.secrets

@@ -27,9 +27,10 @@
   b = branch -v                     # branch (verbose)
 
   # commit
-  c = commit -m                     # commit with message
-  ca = commit -am                   # commit all with message
-  ci = commit                       # commit
+  c = commit --verbose              # commit
+  ca = commit -a                    # commit all
+  cm = commit -m                    # commit with message
+  cam = commit -am                  # commit all with message
   amend = commit --amend            # ammend your last commit
   ammend = commit --amend           # ammend your last commit
 
@@ -80,15 +81,10 @@
   # status
   s = status                        # status
   st = status                       # status
-  stat = status                     # status
 
   # tag
   t = tag -n                        # show tags with <n> lines of each tag message
 
-  # svn helpers
-  svnr = svn rebase
-  svnd = svn dcommit
-  svnl = svn log --oneline --show-commit
 [format]
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [mergetool]
@@ -103,6 +99,8 @@
 [apply]
   whitespace = nowarn
 [branch]
+  # tells git-branch and git-checkout to setup new branches so that git-pull(1)
+  # will appropriately merge from that remote branch
   autosetupmerge = true
 [push]
   # 'git push' will push the current branch to its tracking branch
@@ -111,14 +109,15 @@
 [core]
   autocrlf = false
   editor = vim
-  excludesfile = ~/.yadr/git/gitignore
+  excludesfile = ~/.gitignore
 [advice]
+  # disable “how to stage/unstage/add” hints given by git status
   statusHints = false
 [diff]
   # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
-	algorithm = patience
+  algorithm = patience
 [rerere]
   # Remember my merges
   # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/

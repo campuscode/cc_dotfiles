@@ -15,11 +15,13 @@ set autowrite     " Automatically :write before running commands
 set ignorecase    " Ignore case when searching...
 set smartcase     " ...unless we type a capital
 set showmode      "Show current mode down the bottom
+set visualbell    " No noise
+set nowrap        "Don't wrap lines
 
 syntax on
 
-if filereadable(expand("~/.vim/vimrc.bundles"))
-  source ~/.vim/vimrc.bundles
+if filereadable(expand("~/.vim/plugins.vim"))
+  source ~/.vim/plugins.vim
 endif
 
 " laod custom settings
@@ -97,6 +99,9 @@ set relativenumber
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 set wildmode=list:longest,list:full
+" skip tmp files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
 function! InsertTabWrapper()
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k'
@@ -168,3 +173,8 @@ let g:solarized_termtrans=1
 syntax enable
 set background=dark
 colorscheme solarized
+
+if filereadable(expand("./bin/rspec"))
+  let g:rspec_command = "VtrSendCommandToRunner! ./bin/rspec {spec}"
+endif
+

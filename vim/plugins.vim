@@ -6,33 +6,29 @@ call plug#begin('~/.vim/bundle')
 
 " Define bundles via Github repos
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'christoomey/vim-run-interactive'
 Plug 'skwp/vim-colors-solarized'
-Plug 'scrooloose/nerdtree'
-Plug 'kchmck/vim-coffee-script'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'pbrisbin/vim-mkdir'
-Plug 'scrooloose/syntastic'
-Plug 'slim-template/vim-slim'
+Plug 'scrooloose/nerdtree' " file explorer
+Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
+Plug 'pbrisbin/vim-mkdir' " create folder if it doesn't exist
+Plug 'scrooloose/syntastic' " syntax checking
 Plug 'thoughtbot/vim-rspec'
-Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rails'
+Plug 'keith/rspec.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
 Plug 'chrisbra/color_highlight'
 Plug 'jby/tmux.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim' " pretty status bar
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rking/ag.vim'
 
-if filereadable(expand("~/.vimrc.bundles.local"))
-  source ~/.vimrc.bundles.local
+if filereadable(expand("~/.plugins.vim.local"))
+  source ~/.plugins.vim.local
 endif
 
 call plug#end()
