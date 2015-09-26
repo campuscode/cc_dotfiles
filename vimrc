@@ -5,7 +5,7 @@ set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=500
+set history=1000  " a lot of history
 set ruler         " show the cursor position all the time
 set hlsearch
 set showcmd       " display incomplete commands
@@ -20,9 +20,7 @@ set nowrap        "Don't wrap lines
 
 syntax on
 
-if filereadable(expand("~/.vim/plugins.vim"))
-  source ~/.vim/plugins.vim
-endif
+so ~/.vim/plugins.vim
 
 " laod custom settings
 so ~/.vim/settings.vim
@@ -85,6 +83,8 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+" Default to filename searches
+let g:ctrlp_by_filename = 1
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -93,37 +93,17 @@ set colorcolumn=+1
 " Numbers
 set number
 set numberwidth=5
+" Make easy to navigate
 set relativenumber
 
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
+" enable list of completion
 set wildmode=list:longest,list:full
+
 " skip tmp files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
-
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-
-" Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R .<CR>
-
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -148,11 +128,6 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
-endif
-
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
@@ -165,8 +140,6 @@ if has('persistent_undo')
   set undofile
 endif
 
-let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
-
 autocmd VimEnter * VtrAttachToPane
 
 let g:solarized_termtrans=1
@@ -176,5 +149,11 @@ colorscheme solarized
 
 if filereadable(expand("./bin/rspec"))
   let g:rspec_command = "VtrSendCommandToRunner! ./bin/rspec {spec}"
+else
+  let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
 endif
 
+" Local config
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif

@@ -27,8 +27,8 @@ alias lsg='ll | grep'
 alias lag='la | grep'
 
 # Alias Editing
-alias ae='vim $ccdf/aliases.zsh' #alias edit
-alias ar='source $ccdf/aliases.zsh'  #alias reload
+alias ae='vim $ccdf/aliases' #alias edit
+alias ar='source $ccdf/aliases'  #alias reload
 
 # vim using
 mvim --version > /dev/null 2>&1
@@ -70,7 +70,7 @@ alias gm='git merge'
 alias gms='git merge --squash'
 alias gam='git amend --reset-author'
 alias grv='git remote -v'
-alias grr='git remote rm'
+alias grx='git remote rm'
 alias grad='git remote add'
 alias gr='git rebase'
 alias gra='git rebase --abort'
@@ -91,6 +91,7 @@ alias gdc='git diff --cached -w'
 alias gpl='git pull'
 alias gplr='git pull --rebase'
 alias gp='git push'
+#push current branch
 alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
 alias gnb='git nb' # new branch aka checkout -b
 alias grs='git reset'
@@ -107,7 +108,6 @@ alias less='less -r'
 alias tf='tail -f'
 alias l='less'
 alias lh='ls -alt | head' # see the last modified files
-alias screen='TERM=screen screen'
 alias cl='clear'
 
 # Zippin
@@ -133,11 +133,16 @@ alias rrs='rake routes'
 # Rspec
 alias rs='rspec spec'
 
+#Rails
+alias rc='rails c'
+alias rsb='rails s -b 0.0.0.0'
+
 # Finder
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 # Homebrew
 alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
+
 # your aliases
-[[ -f ~/.aliases.user.zsh ]] && source ~/.aliases.user.zsh
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local

@@ -61,7 +61,7 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 set -o nobeep # no annoying beeps
 
 # aliases
-[[ -f ~/.aliases.zsh ]] && source ~/.aliases.zsh
+[[ -f ~/.aliases ]] && source ~/.aliases
 
 # Peepcode theme to make your terminal simple and beautiful
 source ~/.zsh/themes/peepcode.theme

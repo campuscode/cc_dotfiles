@@ -1,4 +1,3 @@
-# set your user tokens as environment variables, such as ~/.secrets
 # See the README for examples.
 [color]
   ui = true
@@ -52,6 +51,7 @@
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   simple = log --pretty=format:\" * %s\"
   shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+  timeline = log --oneline --graph --decorate
 
   # pull
   pl = pull                         # pull
@@ -89,13 +89,13 @@
   pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
 [mergetool]
   prompt = false
-[mergetool "mvimdiff"]
-  cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+[mergetool "vimdiff"]
+  cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
   keepbackup=false
 [merge]
   summary = true
   verbosity = 1
-  tool = mvimdiff
+  tool = vimdiff
 [apply]
   whitespace = nowarn
 [branch]
@@ -123,4 +123,4 @@
   # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
   enabled = true
 [include]
-  path = ~/.gitconfig.user
+  path = ~/.gitconfig.local
