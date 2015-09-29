@@ -12,9 +12,10 @@ Our dotfiles are based on following amazing dotfiles:
 ## Requirements
 
 * Zsh
-* Ag
-* ITerm (Mac) or GVim (Linux)
-* Solarized
+* [Ag](https://github.com/ggreer/the_silver_searcher)
+* [ITerm 2 (Mac)](https://www.iterm2.com/index.html)
+* MVim (Mac) or GVim (Linux)
+* [Solarized](http://ethanschoonover.com/solarized)
 * zsh-syntax-highlighting
 * Tmux
 
@@ -50,6 +51,7 @@ $ ln -s .cc_dotfiles/gemrc .gemrc
 $ ln -s .cc_dotfiles/bin .bin
 $ source .zshenv
 $ source .zshrc
+$ chsh -s $(which zsh)
 $ tat # to open a new session of tmux
 ```
 

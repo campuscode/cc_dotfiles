@@ -27,6 +27,7 @@ Plug 'itchyny/lightline.vim' " pretty status bar
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rking/ag.vim'
 Plug 'godlygeek/tabular'
+Plug 'Raimondi/delimitMate'
 
 if filereadable(expand("~/.plugins.vim.local"))
   source ~/.plugins.vim.local
