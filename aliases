@@ -50,9 +50,11 @@ alias zr='source ~/.zshrc'
 # Git Aliases
 alias gs='git status'
 alias gst='git status'
+alias gsts='git stash'
 alias gstsh='git stash'
 alias gsp='git stash pop'
 alias gsa='git stash apply'
+alias gsl='git stash list'
 alias gsh='git show'
 alias gshw='git show'
 alias gshow='git show'
@@ -68,7 +70,7 @@ alias guns='git unstage'
 alias gunc='git uncommit'
 alias gm='git merge'
 alias gms='git merge --squash'
-alias gam='git amend --reset-author'
+alias gam='git amend'
 alias grv='git remote -v'
 alias grx='git remote rm'
 alias grad='git remote add'
@@ -91,6 +93,7 @@ alias gdc='git diff --cached -w'
 alias gpl='git pull'
 alias gplr='git pull --rebase'
 alias gp='git push'
+alias gpX='git push --delete'
 #push current branch
 alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
 alias gnb='git nb' # new branch aka checkout -b
@@ -133,7 +136,7 @@ alias rrs='rake routes'
 # Rspec
 alias rs='rspec spec'
 
-#Rails
+# Rails
 alias rc='rails c'
 alias rsb='rails s -b 0.0.0.0'
 
