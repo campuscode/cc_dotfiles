@@ -5,7 +5,6 @@ task :install do
   puts "Thank you for choose Campus Code Dotfiles (cc_dotfiles)"
 
   install_files(Dir.glob([
-    "gemrc",
     "aliases",
     "tmux.conf",
     "vimrc",

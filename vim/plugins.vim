@@ -17,7 +17,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rails'
 Plug 'keith/rspec.vim'
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
@@ -27,7 +26,7 @@ Plug 'itchyny/lightline.vim' " pretty status bar
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rking/ag.vim'
 Plug 'godlygeek/tabular'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 
 if filereadable(expand("~/.plugins.vim.local"))
   source ~/.plugins.vim.local
