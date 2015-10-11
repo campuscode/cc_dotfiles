@@ -23,10 +23,6 @@ imap <silent> <C-K> <%=  %><Esc>3hi
 " create <%= foo %> erb tags using Ctrl-j in edit mode
 imap <silent> <C-J> <%  %><Esc>2hi
 
-" ==== NERD tree
-" Open the project tree and expose current file in the nerdtree with Ctrl-\
-nnoremap <silent> <C-\> :NERDTreeFind<CR>:vertical<CR>
-
 
 " Re-enable tmux_navigator.vim default bindings, minus <c-\>.
 " <c-\> conflicts with NERDTree "current file".
@@ -48,6 +44,7 @@ noremap <Leader>hl :set hlsearch! hlsearch?<CR>
 " Remapping CtrlP
 " let g:ctrlp_map = ' t'
 nnoremap <silent> <Leader>t :CtrlP<CR>
+nnoremap <silent> <Leader>p :CtrlP<CR>
 
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
@@ -73,6 +70,19 @@ function! InsertTabWrapper()
 endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-Tab> <c-n>
+
+function! CloseNerdTree()
+  if g:NERDTree.IsOpen()
+    NERDTreeFind
+    q
+  else
+    NERDTreeFind
+  endif
+endfunction
+" ==== NERD tree
+" Open the project tree and expose current file in the nerdtree with Ctrl-\
+command! LocalCloseNerdTree call CloseNerdTree()
+nnoremap <silent> <C-\> :LocalCloseNerdTree<cr>
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>

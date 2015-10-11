@@ -140,7 +140,11 @@ if has('persistent_undo')
   set undofile
 endif
 
-autocmd VimEnter * VtrAttachToPane
+
+let is_tmux = $TMUX
+if is_tmux != ""
+  autocmd VimEnter * VtrAttachToPane
+endif
 
 let g:solarized_termtrans=1
 syntax enable
