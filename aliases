@@ -1,3 +1,5 @@
+# Based on Skwp's aliases
+# https://raw.githubusercontent.com/skwp/dotfiles/997d36bef991652dd436c076e57d8f00c49f4994/zsh/aliases.zsh
 ccdf=$HOME/.cc_dotfiles
 
 # global
@@ -13,6 +15,7 @@ alias psr='ps aux | grep ruby'
 # Moving around
 alias cdb='cd -'
 alias cls='clear;ls'
+alias clr='clear'
 
 # Show human friendly numbers and colors
 alias df='df -h'
@@ -21,6 +24,12 @@ alias du='du -h -d 2'
 alias ll='ls -lGh'
 alias la='ll -a'
 alias ls='ls -Gh'
+
+if [[ $(uname) == 'linux' ]]
+then
+  alias ll='ls -alh --color=auto'
+  alias ls='ls --color=auto'
+fi
 
 # show me files matching "ls grep"
 alias lsg='ll | grep'
@@ -125,11 +134,13 @@ alias k9='kill -9'
 
 # Gem install
 alias sgi='sudo gem install --no-ri --no-rdoc'
+alias gi='gem install --no-ri --no-rdoc'
 
 # Forward port 80 to 3000
 alias portforward='sudo ipfw add 1000 forward 127.0.0.1,3000 ip from any to any 80 in'
 
 alias rdm='rake db:migrate'
+alias rdr='rake db:rollback'
 alias rdmr='rake db:migrate:redo'
 alias rrs='rake routes'
 
@@ -149,3 +160,5 @@ alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew d
 
 # your aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
+
+# vim: ft=zsh

@@ -38,7 +38,7 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 " vim reload
 nmap <silent> <Leader>vr :so %<CR>
 
-" Type ,hl to toggle highlighting on/off, and show current value.
+" Type <space>hl to toggle highlighting on/off, and show current value.
 noremap <Leader>hl :set hlsearch! hlsearch?<CR>
 
 " Remapping CtrlP
