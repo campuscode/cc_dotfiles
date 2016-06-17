@@ -17,6 +17,10 @@ task :install do
     "irb/*"
   ]))
 
+  install_prereqs
+
+  install_fonts
+
   install_vim_plugins
 
   install_zsh_syntax_highlighting
@@ -56,9 +60,31 @@ def install_files(files)
   end
 end
 
+def install_fonts
+  puts "======================================================"
+  puts "Installing patched fonts for Powerline/Lightline."
+  puts "======================================================"
+  run_command %{ cp -f $HOME/.cc_dotfiles/fonts/* $HOME/Library/Fonts } if RUBY_PLATFORM.downcase.include?("darwin")
+  run_command %{ mkdir -p ~/.fonts && cp ~/.cc_dotfiles/fonts/* ~/.fonts && fc-cache -vf ~/.fonts } if RUBY_PLATFORM.downcase.include?("linux")
+  puts
+end
+
 def run_command(cmd)
   puts "running #{cmd}"
   `#{cmd}`
+end
+
+def macos?
+  RUBY_PLATFORM.downcase.include?("darwin")
+end
+
+def linux?
+  RUBY_PLATFORM.downcase.include?("linux")
+end
+
+def install_prereqs
+  run_command %{ $HOME/.cc_dotfiles/mac.sh } if macos?
+  run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if linux?
 end
 
 def verify_pre_reqs

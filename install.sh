@@ -3,10 +3,15 @@
 if [ ! -d "$HOME/.cc_dotfiles" ]
 then
   echo "Installing Campus Code Dotfiles"
-  echo "Make sure you have installed: "
-  echo "tmux - brew install tmux"
-  echo "zsh - brew install zsh"
-  echo "ag (silver searcher) brew install the_silver_searcher"
+  echo "We'll install:"
+  echo "  - tmux"
+  echo "  - silver searcher"
+  echo "  - zsh"
+  echo "  - vim (vim-gnome | macvim)"
+  echo "  - google-chrome"
+  echo "  - iterm2 (mac)"
+  echo "  - atom"
+
   git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
   cd "$HOME/.cc_dotfiles"
   rake install

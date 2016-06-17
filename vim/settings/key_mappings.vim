@@ -18,7 +18,7 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
 " create <%= foo %> erb tags using Ctrl-k in edit mode
-imap <silent> <C-K> <%=  %><Esc>3hi
+imap <silent> <C-K> <%=  %><Esc>2hi
 
 " create <%= foo %> erb tags using Ctrl-j in edit mode
 imap <silent> <C-J> <%  %><Esc>2hi
@@ -36,7 +36,7 @@ nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 " vim reload
-nmap <silent> <Leader>vr :so %<CR>
+nmap <silent> <Leader>vr :so ~/.vimrc<CR>
 
 " Type <space>hl to toggle highlighting on/off, and show current value.
 noremap <Leader>hl :set hlsearch! hlsearch?<CR>
@@ -45,6 +45,7 @@ noremap <Leader>hl :set hlsearch! hlsearch?<CR>
 " let g:ctrlp_map = ' t'
 nnoremap <silent> <Leader>t :CtrlP<CR>
 nnoremap <silent> <Leader>p :CtrlP<CR>
+nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
 
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
@@ -56,6 +57,10 @@ nnoremap <silent> <S-t> :tabnew<CR>
 
 " Rubocop
 map <Leader>ru :call VtrSendCommand('rubocop')<CR>
+map <Leader>rfu :call VtrSendCommand('rubocop ' . expand("%"))<CR>
+
+" Flog
+map <Leader>fl :call VtrSendCommand('flog ' . expand("%"))<CR>
 
 " Tab completion
 " will insert tab at beginning of line,

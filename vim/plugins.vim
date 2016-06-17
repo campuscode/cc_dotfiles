@@ -27,6 +27,7 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'rking/ag.vim'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-repeat'
 
 if filereadable(expand("~/.plugins.vim.local"))
   source ~/.plugins.vim.local

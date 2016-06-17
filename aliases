@@ -55,6 +55,10 @@ alias ve='vim ~/.vimrc'
 # zsh profile editing
 alias ze='vim ~/.zshrc'
 alias zr='source ~/.zshrc'
+alias zrl='source ~/.zshrc.local'
+
+# history
+alias hfull='history 1 -1'
 
 # Git Aliases
 alias gs='git status'
