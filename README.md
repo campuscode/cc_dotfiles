@@ -28,8 +28,13 @@ sh -c "`curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/maste
 
 Type your password to change your default shell to `zsh`
 
+## Docs
 
-## It's easy to make your customizations
+[Vim Key Mapping](Vim.md)
+
+[Tmux Key Mapping](Tmux.md)
+
+#### It's easy to make your customizations
 
 Place your customizations in the following files:
 
