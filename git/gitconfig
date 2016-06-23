@@ -124,6 +124,3 @@
   enabled = true
 [include]
   path = ~/.gitconfig.local
-[user]
-	name = Alan Rafael R. Batista
-	email = alanrrb@gmail.com
