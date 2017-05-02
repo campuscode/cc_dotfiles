@@ -8,9 +8,9 @@ then
   echo "  - silver searcher"
   echo "  - zsh"
   echo "  - vim (vim-gnome | macvim)"
-  echo "  - google-chrome"
+  echo "  - google-chrome (mac)"
   echo "  - iterm2 (mac)"
-  echo "  - atom"
+  echo "  - atom (mac)"
 
   git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
   cd "$HOME/.cc_dotfiles"

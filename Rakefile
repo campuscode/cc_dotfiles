@@ -71,7 +71,7 @@ end
 
 def run_command(cmd)
   puts "running #{cmd}"
-  `#{cmd}`
+  system cmd
 end
 
 def macos?
