@@ -1,6 +1,5 @@
 setopt promptsubst
 
-
 # load our own completion functions
 fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
 
@@ -68,3 +67,5 @@ TERM=screen-256color
 
 # Your secrets env var
 [[ -f ~/.secrets ]] && source ~/.secrets
+
+setopt interactivecomments
