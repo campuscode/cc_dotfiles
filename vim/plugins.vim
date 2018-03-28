@@ -21,7 +21,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/tComment'
 Plug 'chrisbra/color_highlight'
-Plug 'jby/tmux.vim' " tmux syntax
+Plug 'tmux-plugins/vim-tmux'
 Plug 'itchyny/lightline.vim' " pretty status bar
 Plug 'christoomey/vim-tmux-runner'
 Plug 'rking/ag.vim'
