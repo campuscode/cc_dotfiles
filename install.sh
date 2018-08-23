@@ -13,9 +13,16 @@ then
   echo "  - atom (mac)"
 
   case "$(uname -s)" in
-    Linux | Darwin)
+    Linux)
+      sudo apt-get install -y git curl gnupg build-essential
       gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-      \curl -sSL https://get.rvm.io | bash -s stable
+      curl -sSL https://get.rvm.io | bash -s stable --ruby
+      sudo usermod -a -G rvm `whoami`
+      ;;
+    Darwin )
+      gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+      curl -sSL https://get.rvm.io | bash -s stable --ruby
+      sudo usermod -a -G rvm `whoami`
       ;;
     CYGWIN* | MSYS*)
       echo 'You are using a Windows which is not recommended to use with out dotfiles.'
@@ -24,6 +31,7 @@ then
       ;;
     *)
       echo 'Operational system not recognized, aborting installation'
+      return
       ;;
   esac
   git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
