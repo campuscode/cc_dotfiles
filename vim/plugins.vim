@@ -28,6 +28,7 @@ Plug 'rking/ag.vim'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
+Plug 'terryma/vim-multiple-cursors'
 
 if filereadable(expand("~/.plugins.vim.local"))
   source ~/.plugins.vim.local
