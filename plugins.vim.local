@@ -1,0 +1,4 @@
+Plug 'Yggdroot/indentLine'
+Plug 'mattn/emmet-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-easy-align'

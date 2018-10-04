@@ -1,0 +1,6 @@
+" disable arrow keys
+nnoremap <Left> :echoe "use h"<CR>
+nnoremap <Down> :echoe "use j"<CR>
+nnoremap <Up> :echoe "use k"<CR>
+nnoremap <Right> :echoe "use l"<CR>
+autocmd BufWritePre * :%s/\s\+$//e
