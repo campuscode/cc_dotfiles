@@ -18,6 +18,7 @@ then
       gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
       curl -sSL https://get.rvm.io | bash -s stable --ruby
       sudo usermod -a -G rvm `whoami`
+      sudo apt-get install ruby
       ;;
     Darwin )
       gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -25,8 +26,9 @@ then
       sudo usermod -a -G rvm `whoami`
       ;;
     CYGWIN* | MSYS*)
-      echo 'You are using a Windows which is not recommended to use with out dotfiles.'
-      echo 'Abort installation'
+      echo 'You are using a Windows machine which is not recommended to use with our' \
+           ' dotfiles.'
+      echo 'You can clone our repository and install it manually.'
       return
       ;;
     *)
