@@ -8,22 +8,19 @@ then
   echo "  - silver searcher"
   echo "  - zsh"
   echo "  - vim (vim-gnome | macvim)"
-  echo "  - google-chrome (mac)"
-  echo "  - iterm2 (mac)"
-  echo "  - atom (mac)"
+  echo "  - google-chrome"
 
   case "$(uname -s)" in
     Linux)
-      sudo apt-get install -y git curl gnupg build-essential
-      gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-      curl -sSL https://get.rvm.io | bash -s stable --ruby
-      sudo usermod -a -G rvm `whoami`
+      echo "  - git(linux)"
+      echo "  - spotify(linux)"
+      echo "  - rambox(linux)"
+      sudo apt-get install git
       sudo apt-get install ruby
       ;;
     Darwin )
-      gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-      curl -sSL https://get.rvm.io | bash -s stable --ruby
-      sudo usermod -a -G rvm `whoami`
+      echo "  - iterm2 (mac)"
+      echo "  - atom (mac)"
       ;;
     CYGWIN* | MSYS*)
       echo 'You are using a Windows machine which is not recommended to use with our' \
@@ -36,7 +33,7 @@ then
       return
       ;;
   esac
-  git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
+  git clone --depth=10 https://github.com/HenriqueMorato/cc_dotfiles.git "$HOME/.cc_dotfiles"
   cd "$HOME/.cc_dotfiles"
   rake install
 else

@@ -1,0 +1,5 @@
+[[ $- != *i* ]] && return
+[[ -z "$TMUX" ]] && exec tmux
+
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i

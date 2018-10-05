@@ -6,16 +6,22 @@ task :install do
 
   install_files(Dir.glob([
     "aliases",
+    "aliases.local",
     "tmux.conf",
     "vimrc",
     "zsh",
     "zshenv",
     "zshrc",
+    "zshrc.local",
     "bin",
     "vim",
+    "plugins.vim.local",
+    "vimrc.local",
     "git/*",
     "irb/*"
   ]))
+
+  install_rvm
 
   install_prereqs
 
@@ -29,6 +35,16 @@ task :install do
 end
 
 private
+
+def install_rvm
+  puts "======================================================"
+  puts "Installing rvm."
+  puts "======================================================"
+  system 'sudo apt-get install -y git gnupg build-essential'
+  system 'gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3'
+  system 'curl -sSL https://get.rvm.io | bash -s stable --ruby'
+  system 'sudo usermod -a -G rvm `whoami`'
+end
 
 def install_vim_plugins
   system "vim -N \"+set hidden\" \"+syntax on\" +PlugInstall +qall"
