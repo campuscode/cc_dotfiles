@@ -6,13 +6,17 @@ task :install do
 
   install_files(Dir.glob([
     "aliases",
+    "aliases.local",
     "tmux.conf",
     "vimrc",
     "zsh",
     "zshenv",
     "zshrc",
+    "zshrc.local",
     "bin",
     "vim",
+    "plugins.vim.local",
+    "vimrc.local",
     "git/*",
     "irb/*"
   ]))

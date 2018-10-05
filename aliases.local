@@ -1,0 +1,58 @@
+# General Unix
+alias aliass='alias | grep'
+
+alias cd..='cd ..'
+
+alias myprecious='sudo chown $(whoami) -R .'
+
+alias updateme='sudo apt-get update && sudo apt-get upgrade && sudo apt-get \
+dist-upgrade && sudo do-release-upgrade'
+
+alias open='nautilus &'
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+alias trackpadon='sh ~/disable_touchpad.sh 0'
+alias trackpadoff='sh ~/disable_touchpad.sh'
+
+# Docker
+alias dcr='docker-compose run --rm --service-ports'
+
+alias di='docker images'
+
+alias drmi='docker rmi'
+
+drai() { docker rmi $(docker images -q);  }
+
+alias dbash='docker-compose run --rm --service-ports web bash'
+
+alias dcd='docker-compose down'
+
+alias dcb='docker-compose build'
+
+alias dce='docker exec -i -t'
+
+alias dps='docker ps'
+
+dstop() { docker stop $(docker ps -a -q); }
+
+drm() { docker rm $(docker ps -a -q);  }
+
+# Git
+alias gamquick='ga && gam --no-edit'
+
+days() { git log --pretty=format:%cd --date=short | uniq }
+
+gitstat() { echo -n Number of revisions:;
+         git log --oneline | wc -l;
+         echo -n Number of developers:;
+         git shortlog -s | wc -l;
+         echo -n Number of days:;
+         days | wc -l
+         echo -n Number of files in the working directory:;
+         git ls-files | wc -l
+};
+
+# Ruby
+alias coverage='google-chrome coverage/index.html'
