@@ -18,18 +18,36 @@ git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
 ~/.cc_dotfiles/gnome-terminal-colors-solarized/install.sh
 sudo apt-get purge ruby
 
-echo '===========Installing Google Chrome ==========='
+echo "======================================================"
+echo "Installing Google Chrome."
+echo "======================================================"
+echo
+
 sudo apt install google-chrome-stable
-echo '=========== Installing Spotify ==========='
+
+echo "======================================================"
+echo "Installing Spotify"
+echo "======================================================"
+echo
+
 sudo apt install spotify-client
-echo '=========== Installing Rambox ==========='
+
+echo "======================================================"
+echo "Installing Rambox"
+echo "======================================================"
+echo
+
 wget $(curl -s https://api.github.com/repos/ramboxapp/community-edition/releases | grep browser_download_url | grep '64[.]deb' | head -n 1 | cut -d '"' -f 4) -O rambox.deb
 sudo dpkg -i rambox.deb
 sudo apt-get install -f
 sudo rm -f rambox.deb
-echo '=========== Changing terminal colors ==========='
+
+echo "======================================================"
+echo "Changing terminal colors"
+echo "======================================================"
+echo
+
 bash ./ubuntu/gnome-terminal-profile import ./ubuntu/profile_colors
-export PATH="$PATH:$HOME/.rvm/bin"
 
 echo 'Change your terminal window to Run command as login shell and restart'
 echo 'You can find more information about this on' \

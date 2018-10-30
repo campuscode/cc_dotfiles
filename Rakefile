@@ -21,6 +21,8 @@ task :install do
     "irb/*"
   ]))
 
+  install_rvm
+
   install_prereqs
 
   install_fonts
@@ -34,8 +36,21 @@ end
 
 private
 
+def install_rvm
+  puts "======================================================"
+  puts "Installing rvm."
+  puts "======================================================"
+  system 'sudo apt-get install -y git gnupg build-essential'
+  system 'gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3'
+  system 'curl -sSL https://get.rvm.io | bash -s stable --ruby'
+  system 'sudo usermod -a -G rvm `whoami`'
+end
+
 def install_vim_plugins
   system "vim -N \"+set hidden\" \"+syntax on\" +PlugInstall +qall"
+  system "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+  system "tmux source ~/.tmux.conf"
+  system "~/.tmux/plugins/tpm/bin/install_plugins"
 end
 
 def change_shell
