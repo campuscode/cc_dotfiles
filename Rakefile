@@ -48,6 +48,9 @@ end
 
 def install_vim_plugins
   system "vim -N \"+set hidden\" \"+syntax on\" +PlugInstall +qall"
+  system "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+  system "tmux source ~/.tmux.conf"
+  system "~/.tmux/plugins/tpm/bin/install_plugins"
 end
 
 def change_shell
