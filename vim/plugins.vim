@@ -6,8 +6,6 @@ call plug#begin('~/.vim/bundle')
 
 " Define bundles via Github repos
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'skwp/vim-colors-solarized'
-Plug 'scrooloose/nerdtree' " file explorer
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 Plug 'pbrisbin/vim-mkdir' " create folder if it doesn't exist
 Plug 'scrooloose/syntastic' " syntax checking

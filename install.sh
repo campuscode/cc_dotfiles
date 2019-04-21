@@ -2,15 +2,11 @@
 
 if [ ! -d "$HOME/.cc_dotfiles" ]
 then
-  echo "Installing Campus Code Dotfiles"
+  echo "Installing Allan Siqueira"
   echo "We'll install:"
   echo "  - tmux"
-  echo "  - silver searcher"
   echo "  - zsh"
   echo "  - vim (vim-gnome | macvim)"
-  echo "  - google-chrome (mac)"
-  echo "  - iterm2 (mac)"
-  echo "  - atom (mac)"
 
   case "$(uname -s)" in
     Linux)
@@ -28,7 +24,6 @@ then
     CYGWIN* | MSYS*)
       echo 'You are using a Windows machine which is not recommended to use with our' \
            ' dotfiles.'
-      echo 'You can clone our repository and install it manually.'
       return
       ;;
     *)
@@ -36,9 +31,9 @@ then
       return
       ;;
   esac
-  git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
-  cd "$HOME/.cc_dotfiles"
+  git clone --depth=10 https://github.com/AllanSiqueira/sq_dotfiles.git "$HOME/.cc_dotfiles"
+  cd "$HOME/.sq_dotfiles"
   rake install
 else
-  echo "You already have Campus Code Dotfiles installed."
+  echo "You already have the Dotfiles installed."
 fi

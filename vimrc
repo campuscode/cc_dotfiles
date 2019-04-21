@@ -22,7 +22,7 @@ syntax on
 
 so ~/.vim/plugins.vim
 
-" laod custom settings
+" load custom settings
 so ~/.vim/settings.vim
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.

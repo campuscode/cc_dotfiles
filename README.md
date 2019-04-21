@@ -1,4 +1,4 @@
-CAMPUS CODE Dotfiles
+SQ Dotfiles
 ====================
 
 ## Source of inspiration
@@ -9,7 +9,13 @@ Our dotfiles are based on following amazing dotfiles:
 
 [ThoughtBot Dotfiles](http://github.com/thoughtbot/dotfiles)
 
+[Campus Code Dotfiles](https://github.com/campuscode/cc_dotfiles)
+
 ## Requirements
+
+* curl
+
+## What is installed
 
 * Zsh
 * [Ag](https://github.com/ggreer/the_silver_searcher)
@@ -23,7 +29,7 @@ Our dotfiles are based on following amazing dotfiles:
 Run follow command:
 
 ```
-sh -c "`curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/master/install.sh`"
+sh -c "`curl -fSs https://raw.githubusercontent.com/AllanSiqueira/sq_dotfiles/master/install.sh`"
 ```
 
 Type your password to change your default shell to `zsh`

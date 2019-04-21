@@ -12,11 +12,6 @@ alias psa="ps aux"
 alias psg="ps aux | grep "
 alias psr='ps aux | grep ruby'
 
-# Moving around
-alias cdb='cd -'
-alias cls='clear;ls'
-alias clr='clear'
-
 # Show human friendly numbers and colors
 alias df='df -h'
 alias du='du -h -d 2'

@@ -1,8 +1,8 @@
 require 'rake'
 
-desc 'Install Campus Code Dotfile in your machine'
+desc 'Install the Dotfile in this machine'
 task :install do
-  puts "Thank you for choose Campus Code Dotfiles (cc_dotfiles)"
+  puts "Thanks for use this dotfiles :)"
 
   install_files(Dir.glob([
     "aliases",
