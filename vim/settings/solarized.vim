@@ -69,7 +69,7 @@ hi! Constant guifg=#00BCE0
 hi! Comment guifg=#52737B
 hi! link htmlLink Include
 hi! CursorLine cterm=NONE gui=NONE
-hi! Visual ctermbg=233
+hi! Visual ctermbg=White
 hi! Type gui=bold
 hi! EasyMotionTarget ctermfg=100 guifg=#4CE660 gui=bold
 

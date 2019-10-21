@@ -141,10 +141,10 @@ if has('persistent_undo')
 endif
 
 
-let is_tmux = $TMUX
-if is_tmux != ""
-  autocmd VimEnter * VtrAttachToPane
-endif
+"let is_tmux = $TMUX
+"if is_tmux != ""
+"  autocmd VimEnter * VtrAttachToPane
+"endif
 
 let g:solarized_termtrans=1
 syntax enable

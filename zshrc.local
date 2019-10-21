@@ -3,3 +3,4 @@
 
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
+export PATH=$PATH:/snap/bin

@@ -39,6 +39,11 @@ dstop() { docker stop $(docker ps -a -q); }
 
 drm() { docker rm $(docker ps -a -q);  }
 
+alias givemearubycontainer='docker run -it --rm --user "$(id -u):$(id -g)" -v "$PWD":/usr/src/app -w /usr/src/app -p 3000:3000 ruby:latest bash'
+
+# alias givemearubycontainer="docker run -it --rm -v \"${PWD}\":/usr/src/app ruby_dev_img bash"
+
+
 # Git
 alias gamquick='ga && gam --no-edit'
 
@@ -56,3 +61,5 @@ gitstat() { echo -n Number of revisions:;
 
 # Ruby
 alias coverage='google-chrome coverage/index.html'
+
+alias please='sudo'

@@ -4,3 +4,6 @@ nnoremap <Down> :echoe "use j"<CR>
 nnoremap <Up> :echoe "use k"<CR>
 nnoremap <Right> :echoe "use l"<CR>
 autocmd BufWritePre * :%s/\s\+$//e
+" Prevent x override clipboard
+noremap x "_x
+noremap X "_X
