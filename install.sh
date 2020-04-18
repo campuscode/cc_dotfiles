@@ -14,6 +14,7 @@ then
 
   case "$(uname -s)" in
     Linux)
+      sudo apt-get update
       sudo apt-get install -y git curl gnupg2 build-essential
       gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
       curl -sSL https://get.rvm.io | bash -s stable --ruby
