@@ -18,14 +18,11 @@ task :install do
   ]))
 
   install_prereqs
-
   install_fonts
-
   install_vim_plugins
-
   install_zsh_syntax_highlighting
-
   change_shell
+  installation_message
 end
 
 private
@@ -72,6 +69,8 @@ end
 def run_command(cmd)
   puts "running #{cmd}"
   system cmd
+rescue
+  puts "Error running #{cmd}"
 end
 
 def macos?
@@ -82,11 +81,28 @@ def linux?
   RUBY_PLATFORM.downcase.include?("linux")
 end
 
+def linux_message
+  puts "- After installation you should RESTART and run \"rvm install ruby\" \r
+to install the latest ruby version"
+  puts ''
+  puts "- Change your terminal window to Run command as login shell and RESTART"
+  puts ''
+  puts "- You can find more information about this on \r
+https://github.com/rvm/ubuntu_rvm"
+end
+
+def installation_message
+  puts ''
+  puts ''
+  puts '======================================================================='
+  puts 'Thank you!'
+  puts ''
+  puts ''
+  linux_message if linux?
+  puts '======================================================================='
+end
+
 def install_prereqs
   run_command %{ $HOME/.cc_dotfiles/mac.sh } if macos?
   run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if linux?
-end
-
-def verify_pre_reqs
-
 end
