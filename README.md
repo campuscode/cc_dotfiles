@@ -18,6 +18,14 @@ Our dotfiles are based on following amazing dotfiles:
 * [Solarized](http://ethanschoonover.com/solarized)
 * Tmux
 
+## Pre-Requirements
+
+- curl
+
+Ubuntu
+
+- `sudo apt-get install -y curl`
+
 ## Install
 
 Run follow command:
