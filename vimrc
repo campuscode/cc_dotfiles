@@ -16,6 +16,8 @@ set ignorecase    " Ignore case when searching...
 set smartcase     " ...unless we type a capital
 set showmode      "Show current mode down the bottom
 set visualbell    " No noise
+set noerrorbells  " No noise
+set t_vb=         " No noise
 set nowrap        "Don't wrap lines
 
 syntax on
