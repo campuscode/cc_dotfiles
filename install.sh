@@ -28,12 +28,15 @@ then
         git \
         build-essential \
         zsh \
-        tmux \
         dconf-cli \
-        vim-gnome \
+        vim-gtk3 \
         nodejs \
         yarn \
-        ruby
+        ruby \
+        libevent-dev \
+        ncurses-dev \
+        bison \
+        pkg-config
       ;;
     Darwin )
       echo "  - vim (macvim)"
