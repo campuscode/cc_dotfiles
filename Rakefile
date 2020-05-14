@@ -21,6 +21,7 @@ task :install do
   install_fonts
   install_vim_plugins
   install_zsh_syntax_highlighting
+  install_tmux_battery_plugin
   change_shell
   installation_message
 end
@@ -39,6 +40,14 @@ end
 def install_zsh_syntax_highlighting
   unless File.exists?("#{ENV["HOME"]}/.zsh-syntax-highlighting")
     run_command %{ git clone --depth=1 git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-syntax-highlighting }
+  end
+end
+
+def install_tmux_battery_plugin
+  folder = '.tmux-battery'
+  unless File.exists?("#{ENV["HOME"]}/#{folder}")
+    run_command %{ git clone --depth=1 https://github.com/tmux-plugins/tmux-battery ~/#{folder} }
+    run_command %{ echo "run-shell ~/#{folder}/battery.tmux" >> ~/.tmux.conf.local }
   end
 end
 
@@ -82,8 +91,6 @@ def linux?
 end
 
 def linux_message
-  puts "- After installation you should RESTART and run \"rvm install ruby\" \r
-to install the latest ruby version"
   puts ''
   puts "- Change your terminal window to Run command as login shell and RESTART"
   puts ''
