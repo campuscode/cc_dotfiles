@@ -1,19 +1,31 @@
 #!/bin/sh
 
-TMUX_VERSION="3.1b"
-TMUX_SOURCE_FILE="tmux-${TMUX_VERSION}.tar.gz"
-
 install_tmux() {
+  TMUX_VERSION="3.1b"
+  TMUX_SOURCE_FILE="tmux-${TMUX_VERSION}.tar.gz"
+  TMUX_SOURCE_FOLDER="tmux-${TMUX_VERSION}"
+
+  echo "Installing tmux ${TMUX_VERSION}"
   wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/${TMUX_SOURCE_FILE}
   tar -xf ${TMUX_SOURCE_FILE}
-  cd tmux-${TMUX_VERSION}
-  ./configure && make
+  cd $TMUX_SOURCE_FOLDER
+  ./configure
+  make
   sudo make install
+  rm -rf $TMUX_SOURCE_FOLDER
+  rm $TMUX_SOURCE_FILE
 }
 
-install_tmux
+install_gnome_terminal_colors() {
+  GIT_REPO="https://github.com/Anthony25/gnome-terminal-colors-solarized.git"
+  COLORS_PATH="$HOME/.gnome-terminal-colors-solarized"
 
-git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
-~/.cc_dotfiles/gnome-terminal-colors-solarized/install.sh
+  git clone $GIT_REPO $COLORS_PATH
+  $COLORS_PATH/install.sh
+}
+
+install_tmux > /dev/null 2>&1
+install_gnome_terminal_colors
 
 sudo apt-get remove -y ruby
+sudo apt-get autoremove -y
