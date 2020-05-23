@@ -22,6 +22,7 @@ task :install do
   install_vim_plugins
   install_zsh_syntax_highlighting
   install_tmux_battery_plugin
+  tmux_copy_mode
   change_shell
   installation_message
 end
@@ -41,6 +42,13 @@ def install_zsh_syntax_highlighting
   unless File.exists?("#{ENV["HOME"]}/.zsh-syntax-highlighting")
     run_command %{ git clone --depth=1 git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-syntax-highlighting }
   end
+end
+
+def tmux_copy_mode
+  folder = "$HOME/.cc_dotfiles"
+  run_command %{ cp #{folder}/copy_mode_mac.conf.tmp #{folder}/copy_mode.conf } if macos?
+  run_command %{ cp #{folder}/copy_mode_linux.conf.tmp #{folder}/copy_mode.conf } if linux?
+  run_command %{ rm #{folder}/copy*conf.tmp }
 end
 
 def install_tmux_battery_plugin

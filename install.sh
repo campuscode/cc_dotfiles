@@ -25,6 +25,7 @@ then
 
       sudo apt-get install -y silversearcher-ag \
         git \
+        xclip \
         build-essential \
         zsh \
         dconf-cli \

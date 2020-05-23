@@ -1,0 +1,10 @@
+# Setup 'v' to begin selection as in Vim
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+# # Update default binding of `Enter` to also use copy-pipe
+unbind-key -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+
+# vi: set ft=tmux :
+
