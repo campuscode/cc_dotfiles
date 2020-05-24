@@ -25,11 +25,6 @@ alias ll='ls -lGh'
 alias la='ll -a'
 alias ls='ls -Gh'
 
-if [[ $(uname) == 'linux' ]]
-then
-  alias ll='ls -alh --color=auto'
-  alias ls='ls --color=auto'
-fi
 
 # show me files matching "ls grep"
 alias lsg='ll | grep'
@@ -38,6 +33,9 @@ alias lag='la | grep'
 # Alias Editing
 alias ae='vim $ccdf/aliases' #alias edit
 alias ar='source $ccdf/aliases'  #alias reload
+# Local
+alias ael="vim ~/.aliases.local"
+alias arl="source ~/.aliases.local"
 
 # vim using
 mvim --version > /dev/null 2>&1
@@ -64,7 +62,7 @@ alias hfull='history 1 -1'
 alias gs='git status'
 alias gst='git status'
 alias gsts='git stash'
-alias gstsh='git stash'
+alias gsth='git stash'
 alias gsp='git stash pop'
 alias gsa='git stash apply'
 alias gsl='git stash list'
@@ -109,6 +107,7 @@ alias gp='git push'
 alias gpX='git push --delete'
 #push current branch
 alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
+alias gpom="git push origin master"
 alias gnb='git nb' # new branch aka checkout -b
 alias grs='git reset'
 alias grsh='git reset --hard'
@@ -116,8 +115,20 @@ alias gcln='git clean'
 alias gclndf='git clean -df'
 alias gclndfx='git clean -dfx'
 alias gt='git t'
+alias gtn='git t -n'
 alias gbg='git bisect good'
 alias gbb='git bisect bad'
+alias gcl="git clone"
+
+# docker-compose
+alias dc="docker-compose"
+alias dcr="dc run --rm --service-ports"
+alias dcR="dc run --rm" # no service ports
+alias dcrwb="dcr web bash"
+alias dcb="dc build"
+alias dcps="dc ps"
+alias dcS="dc stop"
+alias dcup="dc up"
 
 # Common shell functions
 alias less='less -r'
@@ -128,6 +139,10 @@ alias cl='clear'
 
 # Zippin
 alias gz='tar -zcvf'
+alias bz2="tar -jcvf"
+alias xgz='tar -zxvf'
+alias xbz2="tar -jxvf"
+
 
 # Ruby
 alias tfdl='tail -f log/development.log'
@@ -137,11 +152,7 @@ alias ka9='killall -9'
 alias k9='kill -9'
 
 # Gem install
-alias sgi='sudo gem install --no-ri --no-rdoc'
 alias gi='gem install --no-ri --no-rdoc'
-
-# Forward port 80 to 3000
-alias portforward='sudo ipfw add 1000 forward 127.0.0.1,3000 ip from any to any 80 in'
 
 alias rdm='rake db:migrate'
 alias rdr='rake db:rollback'
@@ -156,11 +167,22 @@ alias rc='rails c'
 alias rsb='rails s -b 0.0.0.0'
 
 # Finder
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+if [[ $(uname) == 'Darwin' ]]
+then
+  alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+  alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+  # Homebrew
+  alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
+  alias mykey="cat ~/.ssh/id_rsa.pub | pbcopy"
+fi
 
-# Homebrew
-alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
+if [[ $(uname) == 'linux' ]]
+then
+  alias ll='ls -alh --color=auto'
+  alias ls='ls --color=auto'
+  alias mykey="cat ~/.ssh/id_rsa.pub | xclip"
+fi
+
 
 # your aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
