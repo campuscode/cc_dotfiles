@@ -1,6 +1,7 @@
 # Based on Skwp's aliases
 # https://raw.githubusercontent.com/skwp/dotfiles/997d36bef991652dd436c076e57d8f00c49f4994/zsh/aliases.zsh
 ccdf=$HOME/.cc_dotfiles
+os_family=`echo $(uname) | tr '[:upper:]' '[:lower:]'`
 
 # global
 alias -g ...='../..'
@@ -34,8 +35,8 @@ alias lag='la | grep'
 alias ae='vim $ccdf/aliases' #alias edit
 alias ar='source $ccdf/aliases'  #alias reload
 # Local
-alias ael="vim ~/.aliases.local"
-alias arl="source ~/.aliases.local"
+alias ael="vim $HOME/.aliases.local"
+alias arl="source $HOME/.aliases.local"
 
 # vim using
 mvim --version > /dev/null 2>&1
@@ -48,12 +49,12 @@ fi
 alias :q='exit'
 
 # vimrc editing
-alias ve='vim ~/.vimrc'
+alias ve='vim $HOME/.vimrc'
 
 # zsh profile editing
-alias ze='vim ~/.zshrc'
-alias zr='source ~/.zshrc'
-alias zrl='source ~/.zshrc.local'
+alias ze='vim $HOME/.zshrc'
+alias zr='source $HOME/.zshrc'
+alias zrl='source $HOME/.zshrc.local'
 
 # history
 alias hfull='history 1 -1'
@@ -166,25 +167,24 @@ alias rs='rspec spec'
 alias rc='rails c'
 alias rsb='rails s -b 0.0.0.0'
 
-# Finder
-if [[ $(uname) == 'Darwin' ]]
+if [[ $os_family == 'Darwin' ]]
 then
+  # Finder
   alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
   # Homebrew
   alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
-  alias mykey="cat ~/.ssh/id_rsa.pub | pbcopy"
+  alias mykey="cat $HOME/.ssh/id_rsa.pub | pbcopy"
 fi
 
-if [[ $(uname) == 'linux' ]]
+if [[ $os_family == 'linux' ]]
 then
-  alias ll='ls -alh --color=auto'
+  alias ll='ls -lh --color=auto'
   alias ls='ls --color=auto'
-  alias mykey="cat ~/.ssh/id_rsa.pub | xclip"
+  alias mykey="cat $HOME/.ssh/id_rsa.pub | xclip"
 fi
-
 
 # your aliases
-[[ -f ~/.aliases.local ]] && source ~/.aliases.local
+[[ -f $HOME/.aliases.local ]] && source $HOME/.aliases.local
 
 # vim: ft=zsh
