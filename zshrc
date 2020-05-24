@@ -55,15 +55,15 @@ set -o nobeep # no annoying beeps
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# Peepcode theme to make your terminal simple and beautiful
-source ~/.zsh/themes/peepcode.theme
-
 # Zsh syntax highlight
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 TERM=screen-256color
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# Peepcode theme to make your terminal simple and beautiful
+source ~/.zsh/themes/peepcode.theme
 
 # Your secrets env var
 [[ -f ~/.secrets ]] && source ~/.secrets
