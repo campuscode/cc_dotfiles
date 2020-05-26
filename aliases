@@ -167,7 +167,7 @@ alias rs='rspec spec'
 alias rc='rails c'
 alias rsb='rails s -b 0.0.0.0'
 
-if [[ $os_family == 'Darwin' ]]
+if [[ $os_family == 'darwin' ]]
 then
   # Finder
   alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
