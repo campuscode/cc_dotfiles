@@ -1,26 +1,37 @@
 CAMPUS CODE Dotfiles
 ====================
 
-## Source of inspiration
+## Introdução
 
-Our dotfiles are based on following amazing dotfiles:
+Nosso _dotfiles_ são inspirados nos seguintes excelentes dotfiles:
 
 [Skwp Dotfiles](http://github.com/skwp/dotfiles)
 
 [ThoughtBot Dotfiles](http://github.com/thoughtbot/dotfiles)
 
-## Requirements
+Esse dotfiles são usados nos nossos treinamentos, por isso a instalação desse
+dotfiles incluem alguns outros programas, os quais são parte do treinamento.
+
+## Softwares instalados
 
 * Zsh
 * [Ag](https://github.com/ggreer/the_silver_searcher)
-* [ITerm 2 (Mac)](https://www.iterm2.com/index.html)
-* MVim (Mac) or GVim (Linux)
 * [Solarized](http://ethanschoonover.com/solarized)
 * Tmux
 
-## Pre-Requirements
+Somente no MacOs
 
-- curl
+* [ITerm 2 (Mac)](https://www.iterm2.com/index.html)
+* Chrome
+* Atom
+* Visual Studio Code
+* MVim
+
+Somente no Ubuntu Family
+
+* GVim
+
+## Pre-Requirements
 
 Ubuntu
 
@@ -28,19 +39,19 @@ Ubuntu
 
 ## Install
 
-Run follow command:
+Execute o seguinte comando após instalar o `curl`:
 
 ```
 sh -c "`curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/master/install.sh`"
 ```
 
-Type your password to change your default shell to `zsh`
+Sua senha será solicitada para completar a instalação quando necessário.
 
 ## Docs
 
-[Vim Key Mapping](Vim.md)
-
-[Tmux Key Mapping](Tmux.md)
+- [Vim Key Mapping](docs/Vim.md)
+- [Tmux Key Mapping](docs/Tmux.md)
+- [Zsh Key Mapping / Aliases](docs/Zsh.md)
 
 #### It's easy to make your customizations
 
