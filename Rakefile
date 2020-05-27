@@ -46,9 +46,8 @@ end
 
 def tmux_copy_mode
   folder = "$HOME/.cc_dotfiles"
-  run_command %{ cp #{folder}/copy_mode_mac.conf.tmp #{folder}/copy_mode.conf } if macos?
-  run_command %{ cp #{folder}/copy_mode_linux.conf.tmp #{folder}/copy_mode.conf } if linux?
-  run_command %{ rm #{folder}/copy*conf.tmp }
+  run_command %{ cp #{folder}/templates/copy_mode_mac.conf.tmp $HOME/.tmux_copy_mode.conf } if macos?
+  run_command %{ cp #{folder}/templates/copy_mode_linux.conf.tmp $HOME/.tmux_copy_mode.conf } if linux?
 end
 
 def install_tmux_battery_plugin
