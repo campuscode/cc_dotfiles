@@ -24,7 +24,7 @@ function! MyReadonly()
 endfunction
 
 function! MyFugitive()
-  if exists("*fugitive#head")
+  if exists("*FugitiveHead")
     let _ = fugitive#head()
     return strlen(_) ? '⭠ '._ : ''
   endif

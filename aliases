@@ -146,7 +146,6 @@ alias bz2="tar -jcvf"
 alias xgz='tar -zxvf'
 alias xbz2="tar -jxvf"
 
-
 # Ruby
 alias tfdl='tail -f log/development.log'
 alias tftl='tail -f log/test.log'
