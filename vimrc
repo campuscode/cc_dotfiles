@@ -21,6 +21,7 @@ set t_vb=         " No noise
 set nowrap        " Don't wrap lines
 set modeline      " Turn modeline on (Vi magic comment)
 set modelines=5
+set nomodelineexpr
 
 syntax on
 
