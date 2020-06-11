@@ -182,7 +182,7 @@ if [[ $os_family == 'linux' ]]
 then
   alias ll='ls -lh --color=auto'
   alias ls='ls --color=auto'
-  alias mykey="cat $HOME/.ssh/id_rsa.pub | xclip"
+  alias mykey="cat $HOME/.ssh/id_rsa.pub | xclip -i -selection clipboard"
 fi
 
 # your aliases
