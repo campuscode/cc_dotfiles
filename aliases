@@ -38,7 +38,7 @@ alias ar='source $ccdf/aliases'  #alias reload
 alias ael="vim $HOME/.aliases.local"
 alias arl="source $HOME/.aliases.local"
 # Search Alias
-aliass='alias | grep'
+alias aliass='alias | grep'
 
 # vim using
 mvim --version > /dev/null 2>&1
