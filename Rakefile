@@ -23,11 +23,16 @@ task :install do
   install_zsh_syntax_highlighting
   install_tmux_battery_plugin
   tmux_copy_mode
+  add_vimrc_local
   change_shell
   installation_message
 end
 
 private
+
+def cc_dotfiles_folder
+  "$HOME/.cc_dotfiles"
+end
 
 def install_vim_plugins
   system "vim -N \"+set hidden\" \"+syntax on\" +PlugInstall +qall"
@@ -45,16 +50,20 @@ def install_zsh_syntax_highlighting
 end
 
 def tmux_copy_mode
-  folder = "$HOME/.cc_dotfiles"
+  folder = cc_dotfiles_folder
   run_command %{ cp #{folder}/templates/copy_mode_mac.conf.tmp $HOME/.tmux_copy_mode.conf } if macos?
   run_command %{ cp #{folder}/templates/copy_mode_linux.conf.tmp $HOME/.tmux_copy_mode.conf } if linux?
+end
+
+def add_vimrc_local
+  run_command %{ cp #{cc_dotfiles_folder}/templates/vimrc.local.tmp $HOME/.vimrc.local }
 end
 
 def install_tmux_battery_plugin
   folder = '.tmux-battery'
   unless File.exists?("#{ENV["HOME"]}/#{folder}")
-    run_command %{ git clone --depth=1 https://github.com/tmux-plugins/tmux-battery ~/#{folder} }
-    run_command %{ echo "run-shell ~/#{folder}/battery.tmux" >> ~/.tmux.conf.local }
+    run_command %{ git clone --depth=1 https://github.com/tmux-plugins/tmux-battery $HOME/#{folder} }
+    run_command %{ echo "run-shell $HOME/#{folder}/battery.tmux" >> $HOME/.tmux.conf.local }
   end
 end
 

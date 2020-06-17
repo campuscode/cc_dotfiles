@@ -95,3 +95,5 @@ map <Leader>ct :!ctags -R .<CR>
 "grep the current word using K (mnemonic Kurrent)
 nnoremap <silent> K :Ag <cword><CR>
 
+" Git Status
+nnoremap <Leader>gs :Git<CR>

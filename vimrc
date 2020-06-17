@@ -27,7 +27,7 @@ syntax on
 
 so ~/.vim/plugins.vim
 
-" laod custom settings
+" Load custom settings
 so ~/.vim/settings.vim
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
@@ -145,25 +145,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-
-let is_tmux = $TMUX
-if is_tmux != ""
-  autocmd VimEnter * VtrAttachToPane
-endif
-
-let g:solarized_termtrans=1
 syntax enable
-set background=dark
-try
-  colorscheme solarized
-catch
-endtry
-
-if filereadable(expand("./bin/rspec"))
-  let g:rspec_command = "VtrSendCommandToRunner! ./bin/rspec {spec}"
-else
-  let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
-endif
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
