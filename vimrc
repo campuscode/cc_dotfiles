@@ -1,6 +1,9 @@
 " Leader
 let mapleader = " "
 
+" syntax highlighting
+syntax on
+
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
@@ -39,10 +42,7 @@ set complete+=kspell " Autocomplete with dictionary words when spell check is on
 set diffopt+=vertical " Always use vertical diffs
 set splitbelow " Open new split panes to right and bottom,
 set splitright " which feels more natural
-set background=dark " cause I'm not a psychopath
 set spelllang=en_us,pt_br " we're trying to be bilingual
-
-syntax on
 
 " Load plugins
 so ~/.vim/plugins.vim
@@ -130,6 +130,8 @@ endif
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+set background=dark " cause I'm not a psychopath
 
 " set your colorscheme on ~/.vimrc.local
 if !exists('g:colors_name') || g:colors_name == 'default'
