@@ -133,3 +133,5 @@ module CodeRay
     end
   end
 end
+
+# vim: set ft=ruby :

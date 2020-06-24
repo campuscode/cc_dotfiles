@@ -1,6 +1,8 @@
 CAMPUS CODE Dotfiles
 ====================
 
+![](https://i.imgur.com/XogkB7V.png)
+
 ## Source of inspiration
 
 Our dotfiles are based on following amazing dotfiles:
@@ -42,9 +44,9 @@ Type your password to change your default shell to `zsh`
 
 [Tmux Key Mapping](Tmux.md)
 
-#### It's easy to make your customizations
+#### It's easy to make your customization
 
-Place your customizations in the following files:
+Place your customization in the following files:
 
 * .aliases.local
 * .secrets
