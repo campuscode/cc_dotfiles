@@ -83,8 +83,7 @@ inoremap <S-Tab> <c-n>
 
 function! CloseNerdTree()
   if g:NERDTree.IsOpen()
-    NERDTreeFind
-    q
+    NERDTreeClose
   else
     NERDTreeFind
   endif
