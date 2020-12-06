@@ -55,6 +55,11 @@ nnoremap <Leader>= :wincmd =<cr>
 nnoremap <S-Tab> gt
 nnoremap <silent> <S-t> :tabnew<CR>
 
+" copy and paste
+" <space>y + motion ex: <space>yw
+nnoremap <Leader>y "+y
+nnoremap <Leader>p "+p<CR>
+
 " Rubocop
 map <Leader>ru :call VtrSendCommand('rubocop')<CR>
 map <Leader>rfu :call VtrSendCommand('rubocop ' . expand("%"))<CR>
@@ -78,8 +83,7 @@ inoremap <S-Tab> <c-n>
 
 function! CloseNerdTree()
   if g:NERDTree.IsOpen()
-    NERDTreeFind
-    q
+    NERDTreeClose
   else
     NERDTreeFind
   endif
@@ -95,3 +99,5 @@ map <Leader>ct :!ctags -R .<CR>
 "grep the current word using K (mnemonic Kurrent)
 nnoremap <silent> K :Ag <cword><CR>
 
+" Git Status
+nnoremap <Leader>gs :Git<CR>

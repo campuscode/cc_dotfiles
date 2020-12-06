@@ -73,5 +73,6 @@ hi! Visual ctermbg=233
 hi! Type gui=bold
 hi! EasyMotionTarget ctermfg=100 guifg=#4CE660 gui=bold
 
+let g:solarized_termtrans=1
 " Make sure this file loads itself on top of any other color settings
 au VimEnter * so ~/.vim/settings/solarized.vim

@@ -1,6 +1,9 @@
 " Leader
 let mapleader = " "
 
+" syntax highlighting
+syntax on
+
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
@@ -22,12 +25,29 @@ set nowrap        " Don't wrap lines
 set modeline      " Turn modeline on (Vi magic comment)
 set modelines=5
 set nomodelineexpr
+set tabstop=2 " Softtabs, 2 spaces
+set shiftwidth=2
+set shiftround
+set expandtab
+set textwidth=80 " Make it obvious where 80 characters is
+set colorcolumn=+1
+set number " Numbers
+set numberwidth=5
+set relativenumber " Make easy to navigate
+set wildmode=list:longest,list:full " enable list of completion
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.cache " skip tmp files
+set list listchars=tab:»·,trail:·,nbsp:· " Display extra whitespace
+set spellfile=$HOME/.vim-spell.utf-8.add " Set spellfile to location that is guaranteed to exist
+set complete+=kspell " Autocomplete with dictionary words when spell check is on
+set diffopt+=vertical " Always use vertical diffs
+set splitbelow " Open new split panes to right and bottom,
+set splitright " which feels more natural
+set spelllang=en_us,pt_br " we're trying to be bilingual
 
-syntax on
-
+" Load plugins
 so ~/.vim/plugins.vim
 
-" laod custom settings
+" Load custom settings
 so ~/.vim/settings.vim
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
@@ -66,15 +86,6 @@ augroup vimrcEx
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set shiftround
-set expandtab
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
-
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
@@ -91,47 +102,17 @@ endif
 " Default to filename searches
 let g:ctrlp_by_filename = 1
 
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-
-" Numbers
-set number
-set numberwidth=5
-" Make easy to navigate
-set relativenumber
-
-" enable list of completion
-set wildmode=list:longest,list:full
-
-" skip tmp files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.cache
-
 " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
-
-" Set spellfile to location that is guaranteed to exist, can be symlinked to
-" Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
-set spellfile=$HOME/.vim-spell-en.utf-8.add
-
-" Autocomplete with dictionary words when spell check is on
-set complete+=kspell
-
-" Always use vertical diffs
-set diffopt+=vertical
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -145,27 +126,17 @@ if has('persistent_undo')
   set undofile
 endif
 
-
-let is_tmux = $TMUX
-if is_tmux != ""
-  autocmd VimEnter * VtrAttachToPane
-endif
-
-let g:solarized_termtrans=1
-syntax enable
-set background=dark
-try
-  colorscheme solarized
-catch
-endtry
-
-if filereadable(expand("./bin/rspec"))
-  let g:rspec_command = "VtrSendCommandToRunner! ./bin/rspec {spec}"
-else
-  let g:rspec_command = "VtrSendCommandToRunner! rspec {spec}"
-endif
-
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
+endif
+
+set background=dark " cause I'm not a psychopath
+
+" set your colorscheme on ~/.vimrc.local
+if !exists('g:colors_name') || g:colors_name == 'default'
+  try
+    colorscheme gruvbox
+  catch
+  endtry
 endif

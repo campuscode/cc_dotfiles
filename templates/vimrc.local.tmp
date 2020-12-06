@@ -1,0 +1,6 @@
+set background=dark
+try
+  " use colorscheme solarized8 for solarized
+  colorscheme gruvbox
+catch
+endtry
