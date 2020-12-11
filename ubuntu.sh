@@ -18,13 +18,11 @@ install_tmux() {
 }
 
 install_gnome_terminal_colors() {
-  GIT_REPO="https://github.com/Anthony25/gnome-terminal-colors-solarized.git"
-  COLORS_PATH="$HOME/.gnome-terminal-colors-solarized"
-
-  [ -d $COLORS_PATH ] && return
-
-  git clone $GIT_REPO $COLORS_PATH
-  $COLORS_PATH/install.sh
+  THEME_NAME="gruvbox-dark"
+  wget https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/${THEME_NAME}.sh
+  chmod +x ${THEME_NAME}.sh
+  ./${THEME_NAME}.sh
+  rm ${THEME_NAME}.sh
 }
 
 install_tmux > /dev/null 2>&1
