@@ -13,6 +13,8 @@ then
   case "$(uname -s)" in
     Linux)
       echo "  - vim (vim-gnome)"
+      echo "  - Docker"
+      echo "  - docker-compose"
       NODE_VERSION=12
 
       sudo apt-get update
@@ -58,7 +60,14 @@ then
       return
       ;;
   esac
-  git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
+  if [ -z "$LOCAL_INSTALL" ]
+  then
+    echo "FROM REMOTE SOURCE"
+    git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
+  else
+    echo "LOCAL SOURCE"
+    cp -r . "$HOME/.cc_dotfiles"
+  fi
   cd "$HOME/.cc_dotfiles"
   rake install
 else
