@@ -1,3 +1,4 @@
 vim/bundle/
 .DS_Store
 vim/backups
+.vagrant
