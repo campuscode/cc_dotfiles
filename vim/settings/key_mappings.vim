@@ -41,11 +41,11 @@ nmap <silent> <Leader>vr :so ~/.vimrc<CR>
 " Type <space>hl to toggle highlighting on/off, and show current value.
 noremap <Leader>hl :set hlsearch! hlsearch?<CR>
 
-" Remapping CtrlP
-" let g:ctrlp_map = ' t'
+" CtrlP
 nnoremap <silent> <Leader>t :CtrlP<CR>
 nnoremap <silent> <Leader>p :CtrlP<CR>
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <Leader>m :CtrlPMRU<CR>
 
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
