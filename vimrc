@@ -39,7 +39,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.cache " skip tmp files
 set list listchars=tab:»·,trail:·,nbsp:· " Display extra whitespace
 set spellfile=$HOME/.vim-spell.utf-8.add " Set spellfile to location that is guaranteed to exist
 set complete+=kspell " Autocomplete with dictionary words when spell check is on
-set diffopt+=vertical " Always use vertical diffs
+set diffopt=filler,closeoff,vertical " Always use vertical diffs
 set splitbelow " Open new split panes to right and bottom,
 set splitright " which feels more natural
 set spelllang=en_us,pt_br " we're trying to be bilingual
@@ -94,7 +94,7 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
   let g:ctrlp_user_command =
-      \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+      \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "vcr_cassettes"'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
