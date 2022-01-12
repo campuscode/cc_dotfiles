@@ -18,12 +18,11 @@ install_tmux() {
 }
 
 install_gnome_terminal_colors() {
-  THEME_NAME=${THEME_NAME:-gruvbox-dark}
-  TERMINAL=${TERMINAL:-gnome-terminal}
-  wget https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/${THEME_NAME}.sh
-  chmod +x ${THEME_NAME}.sh
-  ./${THEME_NAME}.sh
-  rm ${THEME_NAME}.sh
+  if [[ -z "${TERMINAL}"  ]]; then
+    TERMINAL=gnome-terminal bash -c "$(wget -qO- https://git.io/vQgMr)"
+  else
+    bash -c "$(wget -qO- https://git.io/vQgMr)"
+  fi
 }
 
 install_docker() {

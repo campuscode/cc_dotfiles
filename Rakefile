@@ -45,7 +45,7 @@ end
 
 def install_zsh_syntax_highlighting
   unless File.exists?("#{ENV["HOME"]}/.zsh-syntax-highlighting")
-    run_command %{ git clone --depth=1 git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-syntax-highlighting }
+    run_command %{ git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-syntax-highlighting }
   end
 end
 
