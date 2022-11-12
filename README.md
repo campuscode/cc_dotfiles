@@ -17,7 +17,7 @@ Our dotfiles are based on following amazing dotfiles:
 * [Ag](https://github.com/ggreer/the_silver_searcher)
 * [ITerm 2 (Mac)](https://www.iterm2.com/index.html)
 * MVim (Mac) or GVim (Linux)
-* [Gruvbox]([http://ethanschoonover.com/solarized](https://github.com/morhetz/gruvbox))
+* [Gruvbox](https://github.com/morhetz/gruvbox)
 * Tmux
 
 ## Pre-Requirements
