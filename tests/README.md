@@ -40,7 +40,7 @@ brew install --cask utm
 6. Mount the shared folder inside the VM:
 
 ```bash
-# Inside the VM, install spice tools for shared folders
+# Install spice tools for shared folders
 sudo apt-get update
 sudo apt-get install -y spice-vdagent spice-webdavd davfs2 curl
 
@@ -56,20 +56,15 @@ To auto-mount on boot, add to `/etc/fstab`:
 http://localhost:9843 /mnt/cc_dotfiles davfs user,noauto 0 0
 ```
 
-### Usage
+### Installing dotfiles
 
-```bash
-./tests/test_mac.sh            # start the VM
-./tests/test_mac.sh teardown   # stop the VM
-```
-
-Once the VM is running, open UTM and inside the VM terminal run:
+Inside the VM terminal:
 
 ```bash
 cd /mnt/cc_dotfiles && LOCAL_INSTALL=1 sh install.sh
 ```
 
-### Testing after installation
+### Verifying the installation
 
 Inside the VM, verify:
 - Open a new terminal — it should be running zsh with the peepcode theme
