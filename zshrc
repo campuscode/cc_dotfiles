@@ -22,8 +22,8 @@ export CLICOLOR=1
 # history settings
 setopt hist_ignore_all_dups inc_append_history
 HISTFILE=~/.zhistory
-HISTSIZE=4096
-SAVEHIST=4096
+HISTSIZE=50000
+SAVEHIST=50000
 
 # awesome cd movements from zshkit
 setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
@@ -56,8 +56,10 @@ set -o nobeep # no annoying beeps
 [[ -f ~/.aliases ]] && source ~/.aliases
 
 # Zsh syntax highlight
-source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-TERM=screen-256color
+[[ -f ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ "$(uname)" == "Linux" ]]; then
+  TERM=screen-256color
+fi
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
@@ -71,4 +73,4 @@ source ~/.zsh/themes/peepcode.theme
 setopt interactivecomments
 
 # Load mise (Ruby, Node.js version manager)
-eval "$(~/.local/bin/mise activate zsh)"
+[[ -f ~/.local/bin/mise ]] && eval "$(~/.local/bin/mise activate zsh)"

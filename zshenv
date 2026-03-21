@@ -8,7 +8,7 @@ export CC_GOOD_COMMAND="☻"
 export CC_BAD_COMMAND="☻"
 
 # ensure dotfiles bin directory is loaded first
-export PATH="$HOME/.bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.bin:/usr/local/sbin:$PATH"
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
