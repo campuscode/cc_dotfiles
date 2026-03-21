@@ -1,7 +1,7 @@
 #!/bin/bash
 
 install_tmux() {
-  TMUX_VERSION="3.1b"
+  TMUX_VERSION="${TMUX_VERSION:-3.6a}"
   TMUX_SOURCE_FILE="tmux-${TMUX_VERSION}.tar.gz"
   TMUX_SOURCE_FOLDER="tmux-${TMUX_VERSION}"
 
