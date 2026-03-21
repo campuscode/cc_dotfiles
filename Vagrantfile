@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "utm/ubuntu-24.04"
+  config.vm.box = "bento/ubuntu-24.04"
 
   config.vm.provider :utm do |utm|
     utm.name = "cc-dotfiles"
@@ -15,9 +15,4 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant"
 
   config.vm.provision "shell", inline: "apt-get update && apt-get install -y curl"
-
-  # config.vm.provision "shell", privileged: false, inline: <<-SHELL
-  #   cd /vagrant
-  #   LOCAL_INSTALL=1 sh install.sh
-  # SHELL
 end

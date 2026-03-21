@@ -20,7 +20,8 @@ case "$(uname -s)" in
     sudo apt-get update
     sudo apt-get install -y software-properties-common dconf-cli uuid-runtime
 
-    sudo apt-get install -y silversearcher-ag \
+    sudo apt-get install -y rsync \
+      silversearcher-ag \
       git \
       xclip \
       build-essential \
