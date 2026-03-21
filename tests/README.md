@@ -2,67 +2,41 @@
 
 Test the dotfiles installation in an isolated VM before deploying to your machine.
 
-## macOS (UTM)
+## macOS (Vagrant + UTM)
 
-Uses [UTM](https://mac.getutm.app) to run an Ubuntu Desktop VM with a graphical interface,
-so you can visually verify the full installation (terminal colors, fonts, vim, tmux, etc).
+Uses [Vagrant](https://www.vagrantup.com) with the [vagrant_utm](https://github.com/naveenrajm7/vagrant_utm) plugin
+to run an Ubuntu Desktop VM via UTM. Provides a graphical interface for visually verifying
+terminal colors, fonts, vim, tmux, etc.
 
 ### Setup (one-time)
 
-1. Install UTM:
+1. Install UTM and Vagrant:
 
 ```bash
 brew install --cask utm
+brew install --cask vagrant
 ```
 
-2. Download the [Ubuntu Desktop 24.04 ISO](https://ubuntu.com/download/desktop)
-
-3. Create the VM in UTM:
-   - Open UTM and click **Create a New Virtual Machine**
-   - Select **Virtualize** (Apple Silicon) or **Emulate** (Intel)
-   - Choose **Linux**
-   - In **Boot ISO Image**, browse and select the Ubuntu 24.04 ISO
-   - Recommended settings: 4GB RAM, 2+ CPU cores, 25GB disk
-   - Finish the wizard and name the VM `cc-dotfiles`
-
-4. Install Ubuntu inside the VM:
-   - Start the VM and follow the Ubuntu Desktop installer
-   - Choose a simple username/password (e.g., `dev`/`dev`)
-   - Reboot when prompted (remove the ISO from the CD/DVD drive in UTM settings if it boots back into the installer)
-
-5. Configure directory sharing:
-   - Stop the VM
-   - In UTM, select the VM and click **Edit** (gear icon)
-   - Go to **Sharing**
-   - Enable **Directory sharing** and set the path to this repository's directory
-   - Start the VM again
-
-6. Mount the shared folder inside the VM:
+2. Install the UTM provider plugin:
 
 ```bash
-# Install spice tools for shared folders
-sudo apt-get update
-sudo apt-get install -y spice-vdagent spice-webdavd davfs2 curl
-
-# Create mount point and mount
-sudo mkdir -p /mnt/cc_dotfiles
-sudo mount -t davfs http://localhost:9843 /mnt/cc_dotfiles
-# When prompted for username/password, just press Enter for both
+vagrant plugin install vagrant_utm
 ```
 
-To auto-mount on boot, add to `/etc/fstab`:
-
-```
-http://localhost:9843 /mnt/cc_dotfiles davfs user,noauto 0 0
-```
-
-### Installing dotfiles
-
-Inside the VM terminal:
+### Usage
 
 ```bash
-cd /mnt/cc_dotfiles && LOCAL_INSTALL=1 sh install.sh
+vagrant up             # create VM, install dotfiles
+vagrant ssh            # access the VM via terminal
+vagrant halt           # stop the VM
+vagrant destroy -f     # destroy the VM
+vagrant up --provision # recreate and re-provision from scratch
 ```
+
+To open the graphical desktop, use the UTM app — the VM will appear as `cc-dotfiles`.
+
+The project directory is synced to `/vagrant` inside the VM.
+Edits on the host are immediately visible in the VM.
 
 ### Verifying the installation
 
@@ -75,9 +49,9 @@ Inside the VM, verify:
 
 ### Starting over
 
-To test a clean install from scratch, you can either:
-- Delete `~/.cc_dotfiles` inside the VM and re-run `install.sh`
-- Or destroy the VM in UTM and recreate it from a snapshot
+```bash
+vagrant destroy -f && vagrant up
+```
 
 ## Linux/Ubuntu (Multipass)
 
