@@ -6,22 +6,22 @@ install_tmux() {
   TMUX_SOURCE_FOLDER="tmux-${TMUX_VERSION}"
 
   echo "Installing tmux ${TMUX_VERSION}"
-  wget https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/${TMUX_SOURCE_FILE}
-  tar -xf ${TMUX_SOURCE_FILE}
-  pushd $TMUX_SOURCE_FOLDER
+  curl -LO "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/${TMUX_SOURCE_FILE}"
+  tar -xf "${TMUX_SOURCE_FILE}"
+  pushd "$TMUX_SOURCE_FOLDER"
   ./configure
   make
   sudo make install
   popd
-  rm -rf $TMUX_SOURCE_FOLDER
-  rm $TMUX_SOURCE_FILE
+  rm -rf "$TMUX_SOURCE_FOLDER"
+  rm "$TMUX_SOURCE_FILE"
 }
 
 install_gnome_terminal_colors() {
-  if [[ -z "${TERMINAL}"  ]]; then
-    TERMINAL=gnome-terminal bash -c "$(wget -qO- https://git.io/vQgMr)"
+  if [[ -z "${TERMINAL}" ]]; then
+    TERMINAL=gnome-terminal bash -c "$(curl -sSLo- https://raw.githubusercontent.com/Mayccoll/Gogh/master/gogh.sh)"
   else
-    bash -c "$(wget -qO- https://git.io/vQgMr)"
+    bash -c "$(curl -sSLo- https://raw.githubusercontent.com/Mayccoll/Gogh/master/gogh.sh)"
   fi
 }
 
@@ -38,8 +38,11 @@ install_docker() {
   sudo usermod -aG docker "$(whoami)"
 }
 
-install_tmux > /dev/null 2>&1
+install_tmux
 install_gnome_terminal_colors
-install_docker
+
+if [ "${SKIP_DOCKER:-}" != "1" ]; then
+  install_docker
+fi
 
 sudo apt-get autoremove -y
