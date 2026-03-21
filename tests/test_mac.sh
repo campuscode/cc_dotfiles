@@ -1,24 +1,23 @@
 #!/bin/bash
-# Test cc_dotfiles installation on macOS using OrbStack
+# Test cc_dotfiles installation on macOS using UTM
 #
-# Requires: OrbStack (https://orbstack.dev)
+# Requires: UTM (https://mac.getutm.app) with utmctl CLI
+#   brew install --cask utm
 #
-# OrbStack automatically mounts macOS home at the same path inside the VM,
-# so edits on the host are immediately visible in the VM.
+# Before first run, create an Ubuntu Desktop 24.04 VM in UTM named "cc-dotfiles".
+# Enable directory sharing in VM settings pointing to this project's parent directory.
 #
 # Usage:
-#   ./tests/test_mac.sh            # create VM and install dotfiles
-#   ./tests/test_mac.sh teardown   # destroy the VM
-#   orb shell cc-dotfiles          # access the VM
+#   ./tests/test_mac.sh            # start VM and install dotfiles
+#   ./tests/test_mac.sh teardown   # stop the VM
 
 set -eu
 
 VM_NAME="cc-dotfiles"
-PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 teardown() {
-  orb delete "$VM_NAME" -f
-  echo "VM '$VM_NAME' destroyed."
+  utmctl stop "$VM_NAME"
+  echo "VM '$VM_NAME' stopped."
 }
 
 if [ "${1:-}" = "teardown" ]; then
@@ -26,20 +25,16 @@ if [ "${1:-}" = "teardown" ]; then
   exit 0
 fi
 
-# Recreate VM from scratch
-if orb list | grep -q "$VM_NAME"; then
-  teardown
+# Start the VM if not already running
+if ! utmctl status "$VM_NAME" | grep -q "started"; then
+  utmctl start "$VM_NAME"
+  echo "Waiting for VM to boot..."
+  sleep 30
 fi
 
-orb create ubuntu:24.04 "$VM_NAME"
-
-# Install curl (only prerequisite not in base image)
-orb run -m "$VM_NAME" sudo apt-get update
-orb run -m "$VM_NAME" sudo apt-get install -y curl
-
-# Install dotfiles using the mounted project directory
-orb run -m "$VM_NAME" bash -c "cd $PROJECT_DIR && LOCAL_INSTALL=1 sh install.sh"
-
 echo ""
-echo "Done! Access the VM with: orb shell $VM_NAME"
-echo "Project mounted at: $PROJECT_DIR"
+echo "VM '$VM_NAME' is running."
+echo "Open UTM to access the graphical desktop."
+echo ""
+echo "Inside the VM, run:"
+echo "  cd /path/to/shared/cc_dotfiles && LOCAL_INSTALL=1 sh install.sh"
