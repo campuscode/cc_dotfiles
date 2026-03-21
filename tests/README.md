@@ -26,12 +26,15 @@ vagrant plugin install vagrant_utm
 ### Usage
 
 ```bash
-vagrant up             # create VM, install dotfiles
-vagrant ssh            # access the VM via terminal
-vagrant halt           # stop the VM
-vagrant destroy -f     # destroy the VM
-vagrant up --provision # recreate and re-provision from scratch
+vagrant up --provider=utm   # create VM, install dotfiles
+vagrant ssh                 # access the VM via terminal
+vagrant halt                # stop the VM
+vagrant destroy -f          # destroy the VM
+vagrant up --provision      # re-provision existing VM
 ```
+
+After the first `vagrant up --provider=utm`, subsequent commands (`vagrant ssh`, `vagrant halt`, etc)
+don't need the `--provider` flag.
 
 To open the graphical desktop, use the UTM app — the VM will appear as `cc-dotfiles`.
 
@@ -50,7 +53,7 @@ Inside the VM, verify:
 ### Starting over
 
 ```bash
-vagrant destroy -f && vagrant up
+vagrant destroy -f && vagrant up --provider=utm
 ```
 
 ## Linux/Ubuntu (Multipass)

@@ -52,6 +52,6 @@ PROMPT='
 %~
 ${smiley}  %{$reset_color%}'
 
-RPROMPT='%{$fg[white]%} $(~/.rvm/bin/rvm-prompt)$(git_prompt)%{$reset_color%}'
+RPROMPT='%{$fg[white]%} ruby-$(mise current ruby 2>/dev/null) node-$(mise current node 2>/dev/null)$(git_prompt)%{$reset_color%}'
 
 # vi: set ft=zsh :

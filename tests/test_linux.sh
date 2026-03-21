@@ -36,7 +36,7 @@ multipass exec "$VM_NAME" -- sudo apt-get update
 multipass exec "$VM_NAME" -- sudo apt-get install -y curl
 
 # Install dotfiles using the mounted project directory
-multipass exec "$VM_NAME" -- bash -c 'cd ~/cc_dotfiles && LOCAL_INSTALL=1 sh install.sh'
+multipass exec "$VM_NAME" -- bash -c 'cd ~/cc_dotfiles && LOCAL_INSTALL=1 bash install.sh'
 
 echo ""
 echo "Done! Access the VM with: multipass shell $VM_NAME"

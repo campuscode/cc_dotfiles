@@ -29,16 +29,23 @@ case "$(uname -s)" in
       libevent-dev \
       ncurses-dev \
       bison \
-      pkg-config
+      pkg-config \
+      libssl-dev \
+      libreadline-dev \
+      zlib1g-dev \
+      libyaml-dev \
+      libffi-dev
 
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
-    mise install ruby node
+    mise settings ruby.compile=false
+    mise use --global ruby node
     ;;
   Darwin)
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
-    mise install ruby node
+    mise settings ruby.compile=false
+    mise use --global ruby node
     ;;
   *)
     echo "Operational system not supported, aborting installation"
@@ -51,7 +58,9 @@ if [ -z "${LOCAL_INSTALL:-}" ]; then
   git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
 else
   echo "Installing from local source"
-  cp -r . "$HOME/.cc_dotfiles"
+  rsync -a --no-perms --exclude='.vagrant' --exclude='.git' --exclude='tags' --exclude='vim/autoload' --exclude='vim/bundle' --exclude='vim/backups' . "$HOME/.cc_dotfiles"
+  curl -fLo "$HOME/.cc_dotfiles/vim/autoload/plug.vim" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 cd "$HOME/.cc_dotfiles"
