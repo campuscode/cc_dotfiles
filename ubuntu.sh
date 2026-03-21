@@ -37,5 +37,4 @@ install_tmux > /dev/null 2>&1
 install_gnome_terminal_colors
 install_docker
 
-sudo apt-get remove -y ruby
 sudo apt-get autoremove -y
