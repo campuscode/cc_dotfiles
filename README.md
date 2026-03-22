@@ -13,7 +13,7 @@ Inspired by [Skwp Dotfiles](https://github.com/skwp/dotfiles) and [ThoughtBot Do
 - **Tmux** with `C-a` prefix, vim-aware pane navigation, battery status, and vi copy mode
 - **Git** with aliases, patience diff, vimdiff merge tool, and rerere enabled
 - **mise** for Ruby and Node.js version management
-- **Docker** and Docker Compose (optional, Linux)
+- **Docker** and Docker Compose via [OrbStack](https://orbstack.dev) (macOS) or Docker CE (Linux, optional)
 
 ## Pre-requisites
 
