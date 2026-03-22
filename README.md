@@ -1,4 +1,5 @@
-# Campus Code Dotfiles [![Build Status][build-status-image]][build-status]
+Campus Code Dotfiles [![Build Status][build-status-image]][build-status]
+====================
 
 ![](https://i.imgur.com/XogkB7V.png)
 
