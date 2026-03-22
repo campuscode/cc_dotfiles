@@ -1,5 +1,29 @@
 #!/bin/bash
 
+install_system_deps() {
+  echo "  - vim (vim-gtk3)"
+
+  sudo apt-get update
+  sudo apt-get install -y software-properties-common dconf-cli uuid-runtime
+
+  sudo apt-get install -y rsync \
+    silversearcher-ag \
+    git \
+    xclip \
+    build-essential \
+    zsh \
+    vim-gtk3 \
+    libevent-dev \
+    ncurses-dev \
+    bison \
+    pkg-config \
+    libssl-dev \
+    libreadline-dev \
+    zlib1g-dev \
+    libyaml-dev \
+    libffi-dev
+}
+
 install_tmux() {
   TMUX_VERSION="${TMUX_VERSION:-3.6a}"
   TMUX_SOURCE_FILE="tmux-${TMUX_VERSION}.tar.gz"
@@ -38,6 +62,7 @@ install_docker() {
   sudo usermod -aG docker "$(whoami)"
 }
 
+install_system_deps
 install_tmux
 
 if [ -z "${CI:-}" ]; then

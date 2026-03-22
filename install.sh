@@ -15,49 +15,24 @@ echo "  - mise (Ruby, Node.js)"
 
 case "$(uname -s)" in
   Linux)
-    echo "  - vim (vim-gtk3)"
-
-    sudo apt-get update
-    sudo apt-get install -y software-properties-common dconf-cli uuid-runtime
-
-    sudo apt-get install -y rsync \
-      silversearcher-ag \
-      git \
-      xclip \
-      build-essential \
-      zsh \
-      vim-gtk3 \
-      libevent-dev \
-      ncurses-dev \
-      bison \
-      pkg-config \
-      libssl-dev \
-      libreadline-dev \
-      zlib1g-dev \
-      libyaml-dev \
-      libffi-dev
-
-    curl https://mise.run | sh
-    eval "$(~/.local/bin/mise activate bash)"
-    mise settings ruby.compile=false
-    mise use --global ruby
-    mise use --global node
+    bash "$(dirname "$0")/ubuntu.sh"
     ;;
   Darwin)
     bash "$(dirname "$0")/mac.sh"
     eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
-
-    curl https://mise.run | sh
-    eval "$(~/.local/bin/mise activate bash)"
-    mise settings ruby.compile=false
-    mise use --global ruby
-    mise use --global node
     ;;
   *)
     echo "Operational system not supported, aborting installation"
     exit 1
     ;;
 esac
+
+# Install mise (Ruby, Node.js) — common to all platforms
+curl https://mise.run | sh
+eval "$(~/.local/bin/mise activate bash)"
+mise settings ruby.compile=false
+mise use --global ruby
+mise use --global node
 
 if [ -z "${LOCAL_INSTALL:-}" ]; then
   echo "Installing from remote source"
