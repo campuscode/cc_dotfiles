@@ -40,6 +40,26 @@ For local development installs (from a cloned repo):
 LOCAL_INSTALL=1 bash install.sh
 ```
 
+## Update
+
+To update your dotfiles configuration (re-create symlinks, update plugins, install fonts):
+
+```bash
+cd ~/.cc_dotfiles && git pull && rake install
+```
+
+This is safe to run multiple times — your `*.local` files will be preserved.
+
+## Customization
+
+Do not edit the dotfiles directly, as your changes will be overwritten on the next update. Instead, use the `.local` counterparts for your personal settings:
+
+- `~/.vimrc.local` — Vim overrides (colorscheme, extra plugins, etc.)
+- `~/.tmux.conf.local` — Tmux overrides
+- `~/.zshrc.local` — Zsh overrides (extra aliases, PATH, etc.)
+- `~/.aliases.local` — Extra aliases
+- `~/.gitconfig.local` — Git overrides (user name, email, etc.)
+
 ## Customization
 
 Every config file sources a `.local` counterpart if present. Place your personal overrides in these files rather than modifying the repo directly:
