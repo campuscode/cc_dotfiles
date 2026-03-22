@@ -8,10 +8,9 @@ fi
 
 echo "Installing Campus Code Dotfiles"
 echo "We'll install:"
-echo "  - tmux"
-echo "  - silver searcher"
-echo "  - zsh"
-echo "  - mise (Ruby, Node.js)"
+echo "  - zsh, tmux, vim, git, silver searcher"
+echo "  - mise with Ruby and Node.js"
+echo "  - dotfiles configuration (symlinks, plugins, fonts)"
 
 case "$(uname -s)" in
   Linux)
@@ -27,7 +26,7 @@ case "$(uname -s)" in
     ;;
 esac
 
-# Install mise (Ruby, Node.js) — common to all platforms
+# Install mise with Ruby and Node.js — common to all platforms
 curl https://mise.run | sh
 eval "$(~/.local/bin/mise activate bash)"
 mise settings ruby.compile=false
