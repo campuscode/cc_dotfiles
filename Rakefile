@@ -17,7 +17,6 @@ task :install do
     "irb/*"
   ]))
 
-  install_prereqs
   install_fonts
   install_vim_plugins
   install_zsh_syntax_highlighting
@@ -57,14 +56,19 @@ def tmux_copy_mode
 end
 
 def add_vimrc_local
-  run_command %{ cp #{cc_dotfiles_folder}/templates/vimrc.local.tmp $HOME/.vimrc.local }
+  target = "#{ENV["HOME"]}/.vimrc.local"
+  unless File.exist?(target)
+    run_command %{ cp #{cc_dotfiles_folder}/templates/vimrc.local.tmp #{target} }
+  end
 end
 
 def install_tmux_battery_plugin
   folder = '.tmux-battery'
-  unless File.exist?("#{ENV["HOME"]}/#{folder}")
-    run_command %{ git clone --depth=1 https://github.com/tmux-plugins/tmux-battery $HOME/#{folder} }
-    run_command %{ echo "run-shell $HOME/#{folder}/battery.tmux" >> $HOME/.tmux.conf.local }
+  path = "#{ENV["HOME"]}/#{folder}"
+  if File.exist?(path)
+    run_command %{ git -C #{path} pull }
+  else
+    run_command %{ git clone --depth=1 https://github.com/tmux-plugins/tmux-battery #{path} }
   end
 end
 
@@ -123,7 +127,3 @@ def installation_message
   puts '======================================================================='
 end
 
-def install_prereqs
-  run_command %{ $HOME/.cc_dotfiles/mac.sh } if macos?
-  run_command %{ $HOME/.cc_dotfiles/ubuntu.sh } if linux?
-end
