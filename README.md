@@ -71,3 +71,6 @@ Every config file sources a `.local` counterpart if present. Place your personal
 ## Options
 
 - `SKIP_DOCKER=1` — skip Docker installation on Linux
+
+[build-status-image]: https://github.com/campuscode/cc_dotfiles/actions/workflows/test.yml/badge.svg?branch=master
+[build-status]: https://github.com/campuscode/cc_dotfiles/actions/workflows/test.yml?query=branch%3Amaster
