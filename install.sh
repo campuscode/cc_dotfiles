@@ -40,13 +40,15 @@ case "$(uname -s)" in
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
     mise settings ruby.compile=false
-    mise use --global ruby node
+    mise use --global ruby
+    mise use --global node
     ;;
   Darwin)
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
     mise settings ruby.compile=false
-    mise use --global ruby node
+    mise use --global ruby
+    mise use --global node
     ;;
   *)
     echo "Operational system not supported, aborting installation"
