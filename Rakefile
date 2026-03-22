@@ -39,6 +39,7 @@ def install_vim_plugins
 end
 
 def change_shell
+  return if ENV['CI']
   puts "You will change your default shell to zsh"
   run_command %{ chsh -s $(which zsh) }
 end

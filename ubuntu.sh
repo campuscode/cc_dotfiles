@@ -39,7 +39,10 @@ install_docker() {
 }
 
 install_tmux
-install_gnome_terminal_colors
+
+if [ -z "${CI:-}" ]; then
+  install_gnome_terminal_colors
+fi
 
 if [ "${SKIP_DOCKER:-}" != "1" ]; then
   install_docker
