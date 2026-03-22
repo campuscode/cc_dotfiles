@@ -1,0 +1,50 @@
+name: Test Install
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dotfiles
+        run: CI=true LOCAL_INSTALL=1 MISE_HTTP_TIMEOUT=120 bash install.sh
+      - name: Verify mise
+        run: |
+          eval "$(~/.local/bin/mise activate bash)"
+          mise current ruby
+          mise current node
+      - name: Verify symlinks
+        run: |
+          test -L ~/.aliases
+          test -L ~/.zshrc
+          test -L ~/.vimrc
+          test -L ~/.tmux.conf
+          test -L ~/.gitconfig
+      - name: Verify vim-plug
+        run: test -f ~/.vim/autoload/plug.vim
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dotfiles
+        run: CI=true LOCAL_INSTALL=1 MISE_HTTP_TIMEOUT=120 bash install.sh
+      - name: Verify mise
+        run: |
+          eval "$(~/.local/bin/mise activate bash)"
+          mise current ruby
+          mise current node
+      - name: Verify symlinks
+        run: |
+          test -L ~/.aliases
+          test -L ~/.zshrc
+          test -L ~/.vimrc
+          test -L ~/.tmux.conf
+          test -L ~/.gitconfig
+      - name: Verify vim-plug
+        run: test -f ~/.vim/autoload/plug.vim

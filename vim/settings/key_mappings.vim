@@ -43,7 +43,6 @@ noremap <Leader>hl :set hlsearch! hlsearch?<CR>
 
 " CtrlP
 nnoremap <silent> <Leader>t :CtrlP<CR>
-nnoremap <silent> <Leader>p :CtrlP<CR>
 nnoremap <silent> <Leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <Leader>m :CtrlPMRU<CR>
 

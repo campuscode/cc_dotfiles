@@ -1,58 +1,72 @@
-CAMPUS CODE Dotfiles
-====================
+# Campus Code Dotfiles
 
 ![](https://i.imgur.com/XogkB7V.png)
 
-## Source of inspiration
+A shared dotfiles distribution for **zsh**, **vim**, **tmux**, and **git**, targeting macOS and Ubuntu.
 
-Our dotfiles are based on following amazing dotfiles:
+Inspired by [Skwp Dotfiles](https://github.com/skwp/dotfiles) and [ThoughtBot Dotfiles](https://github.com/thoughtbot/dotfiles).
 
-[Skwp Dotfiles](http://github.com/skwp/dotfiles)
+## What's included
 
-[ThoughtBot Dotfiles](http://github.com/thoughtbot/dotfiles)
+- **Zsh** with vi mode, custom theme (peepcode), syntax highlighting, and extensive aliases
+- **Vim** with vim-plug, gruvbox colorscheme, ALE linting, NERDTree, CtrlP, and tmux integration
+- **Tmux** with `C-a` prefix, vim-aware pane navigation, battery status, and vi copy mode
+- **Git** with aliases, patience diff, vimdiff merge tool, and rerere enabled
+- **mise** for Ruby and Node.js version management
+- **Docker** and Docker Compose via [OrbStack](https://orbstack.dev) (macOS) or Docker CE (Linux, optional)
 
-## Requirements
-
-* Zsh
-* [Ag](https://github.com/ggreer/the_silver_searcher)
-* [ITerm 2 (Mac)](https://www.iterm2.com/index.html)
-* MVim (Mac) or GVim (Linux)
-* [Gruvbox](https://github.com/morhetz/gruvbox)
-* Tmux
-
-## Pre-Requirements
+## Pre-requisites
 
 - curl
 
-Ubuntu
+On Ubuntu, if not already installed:
 
-- `sudo apt-get install -y curl`
+```bash
+sudo apt-get install -y curl
+```
 
 ## Install
 
-Run follow command:
-
-```
-sh -c "`curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/master/install.sh`"
+```bash
+bash -c "$(curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/master/install.sh)"
 ```
 
-Type your password to change your default shell to `zsh`
+You will be prompted for your password to change the default shell to zsh.
+
+For local development installs (from a cloned repo):
+
+```bash
+LOCAL_INSTALL=1 bash install.sh
+```
+
+## Customization
+
+Every config file sources a `.local` counterpart if present. Place your personal overrides in these files rather than modifying the repo directly:
+
+| File | Purpose |
+|---|---|
+| `~/.aliases.local` | Custom shell aliases |
+| `~/.zshrc.local` | Zsh configuration overrides |
+| `~/.zshenv.local` | Environment variables |
+| `~/.vimrc.local` | Vim settings and colorscheme |
+| `~/.plugins.vim.local` | Additional vim plugins |
+| `~/.tmux.conf.local` | Tmux configuration overrides |
+| `~/.gitconfig.local` | Git user name, email, and overrides |
+| `~/.secrets` | API keys and tokens (not tracked by git) |
+
+## Key conventions
+
+- **Vim leader**: `<Space>`
+- **Tmux prefix**: `C-a`
+- **Zsh vi mode**: `jj` to escape
+- **Colorscheme**: gruvbox (dark)
 
 ## Docs
 
-[Vim Key Mapping](Vim.md)
+- [Vim Key Mapping](Vim.md)
+- [Tmux Key Mapping](Tmux.md)
+- [Testing](tests/README.md)
 
-[Tmux Key Mapping](Tmux.md)
+## Options
 
-#### It's easy to make your customization
-
-Place your customization in the following files:
-
-* .aliases.local
-* .secrets
-* .zshrc.local
-* .vimrc.local
-* .zshenv.local
-* .plugin.vim.local
-* .tmux.conf.local
-* .gitconfig.local
+- `SKIP_DOCKER=1` — skip Docker installation on Linux

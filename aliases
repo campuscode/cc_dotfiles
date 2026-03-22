@@ -41,9 +41,7 @@ alias arl="source $HOME/.aliases.local"
 alias aliass='alias | grep'
 
 # vim using
-mvim --version > /dev/null 2>&1
-MACVIM_INSTALLED=$?
-if [ $MACVIM_INSTALLED -eq 0 ]; then
+if command -v mvim > /dev/null 2>&1; then
   alias vim="mvim -v"
 fi
 
@@ -72,7 +70,7 @@ alias gsl='git stash list'
 alias gsh='git show'
 alias gshw='git show'
 alias gshow='git show'
-alias gi='vim .gitignore'
+alias gie='vim .gitignore'
 alias gc='git c'
 alias gcm='git cm'
 alias gca='git ca'
@@ -110,7 +108,7 @@ alias gp='git push'
 alias gpX='git push --delete'
 #push current branch
 alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
-alias gpom="git push origin master"
+alias gpom='git push origin $(git symbolic-ref --short HEAD)'
 alias gnb='git nb' # new branch aka checkout -b
 alias grs='git reset'
 alias grsh='git reset --hard'
@@ -123,8 +121,8 @@ alias gbg='git bisect good'
 alias gbb='git bisect bad'
 alias gcl="git clone"
 
-# docker-compose
-alias dc="docker-compose"
+# docker compose
+alias dc="docker compose"
 alias dcr="dc run --rm --service-ports"
 alias dcR="dc run --rm" # no service ports
 alias dcrwb="dcr web bash"
@@ -154,15 +152,15 @@ alias ka9='killall -9'
 alias k9='kill -9'
 
 # Gem install
-alias gi='gem install --no-ri --no-rdoc'
+alias gi='gem install --no-document'
 
-alias rdm='rake db:migrate'
-alias rdr='rake db:rollback'
-alias rdmr='rake db:migrate:redo'
-alias rrs='rake routes'
+alias rdm='rails db:migrate'
+alias rdr='rails db:rollback'
+alias rdmr='rails db:migrate:redo'
+alias rrs='rails routes'
 
 # Rspec
-alias rs='rspec spec'
+alias rs='rspec'
 
 # Rails
 alias rc='rails c'
@@ -174,7 +172,7 @@ then
   alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
   alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
   # Homebrew
-  alias brewu='brew update && brew upgrade && brew cleanup && brew prune && brew doctor'
+  alias brewu='brew update && brew upgrade && brew cleanup && brew doctor'
   alias mykey="cat $HOME/.ssh/id_rsa.pub | pbcopy"
 fi
 

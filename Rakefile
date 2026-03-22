@@ -39,6 +39,7 @@ def install_vim_plugins
 end
 
 def change_shell
+  return if ENV['CI']
   puts "You will change your default shell to zsh"
   run_command %{ chsh -s $(which zsh) }
 end
@@ -109,9 +110,6 @@ end
 def linux_message
   puts ''
   puts "- Change your terminal window to Run command as login shell and RESTART"
-  puts ''
-  puts "- You can find more information about this on \r
-https://github.com/rvm/ubuntu_rvm"
 end
 
 def installation_message
@@ -121,7 +119,7 @@ def installation_message
   puts 'Thank you!'
   puts ''
   puts ''
-  linux_message if linux?
+  puts "- Run 'mise install ruby node' to install latest versions" if linux?
   puts '======================================================================='
 end
 

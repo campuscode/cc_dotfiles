@@ -8,10 +8,10 @@ call plug#begin('~/.vim/bundle')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lifepillar/vim-solarized8'
 Plug 'gruvbox-community/gruvbox' " default colorscheme
-Plug 'scrooloose/nerdtree' " file explorer
+Plug 'preservim/nerdtree' " file explorer
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy finder
 Plug 'pbrisbin/vim-mkdir' " create folder if it doesn't exist
-Plug 'scrooloose/syntastic' " syntax checking
+Plug 'dense-analysis/ale' " async linting
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -20,7 +20,7 @@ Plug 'tpope/vim-rails'
 Plug 'keith/rspec.vim'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/tComment'
+Plug 'tomtom/tcomment_vim'
 Plug 'chrisbra/color_highlight'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'vim-airline/vim-airline' " Pretty status bar
