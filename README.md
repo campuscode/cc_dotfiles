@@ -29,7 +29,7 @@ sudo apt-get install -y curl
 ## Install
 
 ```bash
-bash -c "$(curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/master/install.sh)"
+bash -c "$(curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/main/install.sh)"
 ```
 
 You will be prompted for your password to change the default shell to zsh.
@@ -72,5 +72,5 @@ Every config file sources a `.local` counterpart if present. Place your personal
 
 - `SKIP_DOCKER=1` — skip Docker installation on Linux
 
-[build-status-image]: https://github.com/campuscode/cc_dotfiles/actions/workflows/test.yml/badge.svg?branch=master
-[build-status]: https://github.com/campuscode/cc_dotfiles/actions/workflows/test.yml?query=branch%3Amaster
+[build-status-image]: https://github.com/campuscode/cc_dotfiles/actions/workflows/test.yml/badge.svg?branch=main
+[build-status]: https://github.com/campuscode/cc_dotfiles/actions/workflows/test.yml?query=branch%3Amain

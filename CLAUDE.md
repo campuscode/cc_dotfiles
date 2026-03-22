@@ -10,7 +10,7 @@ This is **Campus Code Dotfiles (cc_dotfiles)** — a shared dotfiles distributio
 
 ```bash
 # Remote install (clones to ~/.cc_dotfiles, then runs rake install)
-bash -c "$(curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/master/install.sh)"
+bash -c "$(curl -fSs https://raw.githubusercontent.com/campuscode/cc_dotfiles/main/install.sh)"
 
 # Local install (from a cloned repo)
 LOCAL_INSTALL=1 bash install.sh
