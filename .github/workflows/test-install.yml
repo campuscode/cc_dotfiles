@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dotfiles
-        run: CI=true LOCAL_INSTALL=1 bash install.sh
+        run: CI=true LOCAL_INSTALL=1 MISE_HTTP_TIMEOUT=120 bash install.sh
       - name: Verify mise
         run: |
           eval "$(~/.local/bin/mise activate bash)"
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dotfiles
-        run: CI=true LOCAL_INSTALL=1 bash install.sh
+        run: CI=true LOCAL_INSTALL=1 MISE_HTTP_TIMEOUT=120 bash install.sh
       - name: Verify mise
         run: |
           eval "$(~/.local/bin/mise activate bash)"
