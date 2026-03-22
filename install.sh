@@ -45,6 +45,7 @@ case "$(uname -s)" in
     ;;
   Darwin)
     bash "$(dirname "$0")/mac.sh"
+    eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
 
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
