@@ -44,6 +44,8 @@ case "$(uname -s)" in
     mise use --global node
     ;;
   Darwin)
+    bash "$(dirname "$0")/mac.sh"
+
     curl https://mise.run | sh
     eval "$(~/.local/bin/mise activate bash)"
     mise settings ruby.compile=false
