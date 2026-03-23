@@ -86,6 +86,7 @@ Every config file sources a `.local` counterpart if present. Place your personal
 
 - [Vim Key Mapping](Vim.md)
 - [Tmux Key Mapping](Tmux.md)
+- [Mise](Mise.md)
 - [Testing](tests/README.md)
 
 ## Options
