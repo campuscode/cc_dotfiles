@@ -12,12 +12,30 @@ echo "  - zsh, tmux, vim, git, silver searcher"
 echo "  - mise with Ruby and Node.js"
 echo "  - dotfiles configuration (symlinks, plugins, fonts)"
 
+if [ -z "${LOCAL_INSTALL:-}" ]; then
+  echo "Installing from remote source"
+  if ! command -v git > /dev/null 2>&1; then
+    case "$(uname -s)" in
+      Linux)
+        sudo apt-get update
+        sudo apt-get install -y git
+        ;;
+    esac
+  fi
+  git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
+else
+  echo "Installing from local source"
+  rsync -a --no-perms --exclude='.vagrant' --exclude='.git' --exclude='tags' --exclude='vim/autoload' --exclude='vim/bundle' --exclude='vim/backups' . "$HOME/.cc_dotfiles"
+  curl -fLo "$HOME/.cc_dotfiles/vim/autoload/plug.vim" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 case "$(uname -s)" in
   Linux)
-    bash "$(dirname "$0")/ubuntu.sh"
+    bash "$HOME/.cc_dotfiles/ubuntu.sh"
     ;;
   Darwin)
-    bash "$(dirname "$0")/mac.sh"
+    bash "$HOME/.cc_dotfiles/mac.sh"
     eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
     ;;
   *)
@@ -32,16 +50,6 @@ eval "$(~/.local/bin/mise activate bash)"
 mise settings ruby.compile=false
 mise use --global ruby
 mise use --global node
-
-if [ -z "${LOCAL_INSTALL:-}" ]; then
-  echo "Installing from remote source"
-  git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
-else
-  echo "Installing from local source"
-  rsync -a --no-perms --exclude='.vagrant' --exclude='.git' --exclude='tags' --exclude='vim/autoload' --exclude='vim/bundle' --exclude='vim/backups' . "$HOME/.cc_dotfiles"
-  curl -fLo "$HOME/.cc_dotfiles/vim/autoload/plug.vim" --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
 
 cd "$HOME/.cc_dotfiles"
 rake install
