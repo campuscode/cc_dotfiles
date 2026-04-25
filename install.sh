@@ -25,7 +25,7 @@ if [ -z "${LOCAL_INSTALL:-}" ]; then
   git clone --depth=10 https://github.com/campuscode/cc_dotfiles.git "$HOME/.cc_dotfiles"
 else
   echo "Installing from local source"
-  rsync -a --no-perms --exclude='.vagrant' --exclude='.git' --exclude='tags' --exclude='vim/autoload' --exclude='vim/bundle' --exclude='vim/backups' . "$HOME/.cc_dotfiles"
+  rsync -a --no-perms --exclude='.vagrant' --exclude='tags' --exclude='vim/autoload' --exclude='vim/bundle' --exclude='vim/backups' . "$HOME/.cc_dotfiles"
   curl -fLo "$HOME/.cc_dotfiles/vim/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
