@@ -48,17 +48,8 @@ To update your dotfiles configuration (re-create symlinks, update plugins, insta
 cd ~/.cc_dotfiles && git pull && rake install
 ```
 
-This is safe to run multiple times — your `*.local` files will be preserved.
-
-## Customization
-
-Do not edit the dotfiles directly, as your changes will be overwritten on the next update. Instead, use the `.local` counterparts for your personal settings:
-
-- `~/.vimrc.local` — Vim overrides (colorscheme, extra plugins, etc.)
-- `~/.tmux.conf.local` — Tmux overrides
-- `~/.zshrc.local` — Zsh overrides (extra aliases, PATH, etc.)
-- `~/.aliases.local` — Extra aliases
-- `~/.gitconfig.local` — Git overrides (user name, email, etc.)
+This is safe to run multiple times. Existing real files are backed up, while
+managed symlinks are refreshed in place.
 
 ## Customization
 
@@ -74,6 +65,32 @@ Every config file sources a `.local` counterpart if present. Place your personal
 | `~/.tmux.conf.local` | Tmux configuration overrides |
 | `~/.gitconfig.local` | Git user name, email, and overrides |
 | `~/.secrets` | API keys and tokens (not tracked by git) |
+
+To keep personal overrides on your own branch, add them under `local/`. Running
+`rake install` links each `local/<name>` to `~/.<name>`:
+
+```text
+local/aliases.local  -> ~/.aliases.local
+local/vimrc.local    -> ~/.vimrc.local
+local/zshrc.local    -> ~/.zshrc.local
+```
+
+On the first installation, existing files from the table above are copied into
+`local/` before their originals are backed up and replaced with symlinks. If a
+file already exists at both locations, the repository copy is backed up first
+and the existing home configuration is imported. An existing backup is never
+overwritten: the installer uses `.bkp`, `.bkp.1`, and so on. Symlinks that
+already point to the corresponding `local/` file are left unchanged. Other
+valid symlinks are imported and backed up; broken symlinks are reported and
+left untouched because their contents cannot be copied.
+
+Only the seven `*.local` files listed above are migrated automatically.
+`~/.secrets` is never copied into the repository, including through a symlink
+or hardlink bearing an allowed local-file name.
+
+The tracked `local/.keep` keeps the directory available on branches without
+personal files. Other entries under `local/` are ignored unless their names
+appear in the allowlist above.
 
 ## Key conventions
 
