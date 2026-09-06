@@ -11,8 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Prepare existing local files
+        run: tests/test_local_install.sh prepare
       - name: Install dotfiles
         run: CI=true LOCAL_INSTALL=1 MISE_HTTP_TIMEOUT=120 bash install.sh
+      - name: Verify local-file migration
+        run: tests/test_local_install.sh verify
+      - name: Verify failed local-file copy is safe
+        run: tests/test_local_install.sh copy-failure
+      - name: Verify clean first install creates every local file
+        run: tests/test_local_install.sh first-install
       - name: Verify mise
         run: |
           eval "$(~/.local/bin/mise activate bash)"
@@ -32,8 +40,16 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Prepare existing local files
+        run: tests/test_local_install.sh prepare
       - name: Install dotfiles
         run: CI=true LOCAL_INSTALL=1 MISE_HTTP_TIMEOUT=120 bash install.sh
+      - name: Verify local-file migration
+        run: tests/test_local_install.sh verify
+      - name: Verify failed local-file copy is safe
+        run: tests/test_local_install.sh copy-failure
+      - name: Verify clean first install creates every local file
+        run: tests/test_local_install.sh first-install
       - name: Verify mise
         run: |
           eval "$(~/.local/bin/mise activate bash)"

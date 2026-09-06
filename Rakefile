@@ -1,8 +1,22 @@
 require 'rake'
+require 'fileutils'
+require 'tempfile'
+
+LOCAL_FILE_NAMES = %w[
+  aliases.local
+  zshrc.local
+  zshenv.local
+  vimrc.local
+  plugins.vim.local
+  tmux.conf.local
+  gitconfig.local
+].freeze
 
 desc 'Install Campus Code Dotfile in your machine'
 task :install do
   puts "Thank you for choose Campus Code Dotfiles (cc_dotfiles)"
+
+  prepare_local_files
 
   install_files(Dir.glob([
     "aliases",
@@ -16,13 +30,13 @@ task :install do
     "git/*",
     "irb/*"
   ]))
+  install_local_files
 
   install_fonts
   install_vim_plugins
   install_zsh_syntax_highlighting
   install_tmux_battery_plugin
   tmux_copy_mode
-  add_vimrc_local
   change_shell
   installation_message
 end
@@ -55,10 +69,116 @@ def tmux_copy_mode
   run_command %{ cp #{folder}/templates/copy_mode_linux.conf.tmp $HOME/.tmux_copy_mode.conf } if linux?
 end
 
-def add_vimrc_local
-  target = "#{ENV["HOME"]}/.vimrc.local"
-  unless File.exist?(target)
-    run_command %{ cp #{cc_dotfiles_folder}/templates/vimrc.local.tmp #{target} }
+def prepare_local_files
+  FileUtils.mkdir_p('local')
+
+  LOCAL_FILE_NAMES.each do |name|
+    source = "local/#{name}"
+    target = File.join(ENV['HOME'], ".#{name}")
+
+    migrate_local_file(target, source)
+  end
+
+  LOCAL_FILE_NAMES.each do |name|
+    path = "local/#{name}"
+    template = name == 'vimrc.local' ? 'templates/vimrc.local.tmp' : nil
+    ensure_regular_local_file(path, template)
+  end
+end
+
+def ensure_regular_local_file(path, template)
+  if secrets_file?(path)
+    puts "Removing local alias to #{File.join(ENV['HOME'], '.secrets')}: #{path}"
+    FileUtils.rm(path)
+  end
+
+  return if File.file?(path) && !File.symlink?(path)
+
+  if File.symlink?(path) && File.exist?(path) && !secrets_file?(path)
+    puts "Replacing local symlink with a verified regular file: #{path}"
+    copy_local_file_safely(path, path)
+    return
+  end
+
+  if File.exist?(path) || File.symlink?(path)
+    backup = available_backup_path(path)
+    puts "Moving invalid local entry #{path} to #{backup}"
+    FileUtils.mv(path, backup)
+  end
+
+  template ? FileUtils.cp(template, path) : FileUtils.touch(path)
+end
+
+def migrate_local_file(target, source)
+  return unless File.exist?(target) || File.symlink?(target)
+  return if managed_symlink?(target, File.expand_path(source, ENV['PWD']))
+
+  if secrets_file?(target)
+    puts "Skipping local file that resolves to #{File.join(ENV['HOME'], '.secrets')}: #{target}"
+    return
+  end
+
+  if File.symlink?(target) && !File.exist?(target)
+    puts "Skipping broken local symlink #{target}; its target cannot be copied"
+    return
+  end
+
+  puts "Copying existing #{target} to #{source}"
+  copy_local_file_safely(target, source)
+end
+
+def secrets_file?(path)
+  secrets = File.join(ENV['HOME'], '.secrets')
+  File.exist?(secrets) && File.identical?(path, secrets)
+rescue Errno::ENOENT
+  false
+end
+
+def copy_local_file_safely(target, source)
+  source_backup = nil
+
+  Tempfile.create([".#{File.basename(source)}", '.tmp'], File.dirname(source)) do |temporary|
+    FileUtils.copy_file(target, temporary.path)
+    unless FileUtils.compare_file(target, temporary.path)
+      raise "Could not verify copied local file: #{target}"
+    end
+
+    if File.exist?(source) || File.symlink?(source)
+      source_backup = available_backup_path(source)
+      puts "Moving existing #{source} to #{source_backup}"
+      FileUtils.mv(source, source_backup)
+    end
+
+    begin
+      FileUtils.mv(temporary.path, source)
+    rescue
+      FileUtils.mv(source_backup, source) if source_backup && !File.exist?(source) && !File.symlink?(source)
+      raise
+    end
+  end
+end
+
+def local_file_paths
+  LOCAL_FILE_NAMES.map { |name| "local/#{name}" }.select do |path|
+    File.file?(path) && !File.symlink?(path)
+  end
+end
+
+def install_local_files
+  local_file_paths.each do |source|
+    target = File.join(ENV['HOME'], ".#{File.basename(source)}")
+
+    if secrets_file?(target)
+      puts "Leaving local file that resolves to #{File.join(ENV['HOME'], '.secrets')} unchanged: #{target}"
+      next
+    end
+
+    if File.symlink?(target) && !File.exist?(target)
+      puts "Leaving broken local symlink unchanged: #{target}"
+      next
+    end
+
+    install_file(source, target)
   end
 end
 
@@ -75,16 +195,47 @@ end
 def install_files(files)
   files.each do |f|
     file_name = f.split('/').last
-    source = "#{ENV["PWD"]}/#{f}"
     file = "#{ENV["HOME"]}/.#{file_name}"
 
-    if File.exist?(file)
-      puts "Moving #{file} to #{file}.bkp"
-      run_command %{ mv #{file} #{file}.bkp }
-    end
-
-    run_command %{ ln -nfs "#{source}" "#{file}" }
+    install_file(f, file)
   end
+end
+
+def install_file(source_path, file)
+  source = File.expand_path(source_path, ENV['PWD'])
+
+  return if managed_symlink?(file, source)
+
+  if File.exist?(file) || File.symlink?(file)
+    backup = available_backup_path(file)
+    puts "Moving #{file} to #{backup}"
+    FileUtils.mv(file, backup)
+  end
+
+  FileUtils.ln_sf(source, file)
+end
+
+def managed_symlink?(file, source)
+  return false unless File.symlink?(file)
+
+  linked_path = File.expand_path(File.readlink(file), File.dirname(file))
+  return true if linked_path == source
+
+  File.exist?(file) && File.exist?(source) && File.identical?(file, source)
+rescue Errno::ENOENT
+  false
+end
+
+def available_backup_path(file)
+  backup = "#{file}.bkp"
+  suffix = 0
+
+  while File.exist?(backup) || File.symlink?(backup)
+    suffix += 1
+    backup = "#{file}.bkp.#{suffix}"
+  end
+
+  backup
 end
 
 def install_fonts
@@ -126,4 +277,3 @@ def installation_message
   puts "- Run 'mise install ruby node' to install latest versions" if linux?
   puts '======================================================================='
 end
-

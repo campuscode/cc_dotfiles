@@ -48,17 +48,8 @@ To update your dotfiles configuration (re-create symlinks, update plugins, insta
 cd ~/.cc_dotfiles && git pull && rake install
 ```
 
-This is safe to run multiple times — your `*.local` files will be preserved.
-
-## Customization
-
-Do not edit the dotfiles directly, as your changes will be overwritten on the next update. Instead, use the `.local` counterparts for your personal settings:
-
-- `~/.vimrc.local` — Vim overrides (colorscheme, extra plugins, etc.)
-- `~/.tmux.conf.local` — Tmux overrides
-- `~/.zshrc.local` — Zsh overrides (extra aliases, PATH, etc.)
-- `~/.aliases.local` — Extra aliases
-- `~/.gitconfig.local` — Git overrides (user name, email, etc.)
+This is safe to run multiple times. Existing real files are backed up, while
+managed symlinks are refreshed in place.
 
 ## Customization
 
@@ -74,6 +65,40 @@ Every config file sources a `.local` counterpart if present. Place your personal
 | `~/.tmux.conf.local` | Tmux configuration overrides |
 | `~/.gitconfig.local` | Git user name, email, and overrides |
 | `~/.secrets` | API keys and tokens (not tracked by git) |
+
+Personal overrides are stored under the Git-ignored `local/` directory. Running
+`rake install` links each `local/<name>` to `~/.<name>`:
+
+```text
+local/aliases.local  -> ~/.aliases.local
+local/vimrc.local    -> ~/.vimrc.local
+local/zshrc.local    -> ~/.zshrc.local
+```
+
+On the first installation, existing files from the table above are copied into
+`local/` before their originals are backed up and replaced with symlinks. If a
+file already exists at both locations, the repository copy is backed up first
+and the existing home configuration is imported. An existing backup is never
+overwritten: the installer uses `.bkp`, `.bkp.1`, and so on. Symlinks that
+already point to the corresponding `local/` file are left unchanged. Other
+valid symlinks are imported and backed up; broken symlinks are reported and
+left untouched because their contents cannot be copied.
+
+All seven allowed files are guaranteed to exist under `local/` after
+installation. Missing files are created empty, except `local/vimrc.local`,
+which is initialized from the existing Vim template. An invalid entry already
+using one of these paths, such as a directory or broken symlink, is preserved
+under the next available backup name before the regular file is created.
+
+Only the seven `*.local` files listed above are migrated automatically.
+`~/.secrets` is never copied into the repository, including through a symlink
+or hardlink bearing an allowed local-file name. An existing alias to
+`~/.secrets` inside `local/` is removed without creating another repository
+copy; the original secret file remains untouched.
+
+The tracked `local/.keep` keeps the directory available after cloning. All
+other entries under `local/` are excluded from Git, and the installer ignores
+their names unless they appear in the allowlist above.
 
 ## Key conventions
 
