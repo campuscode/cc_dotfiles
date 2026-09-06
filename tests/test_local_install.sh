@@ -109,8 +109,43 @@ raise if Dir.glob('local/zshrc.local.bkp*').any?
 RUBY
     )
     ;;
+  first-install)
+    test_root=$(mktemp -d)
+    mkdir "$test_root/repo" "$test_root/home"
+    cp Rakefile "$test_root/repo/Rakefile"
+    mkdir "$test_root/repo/templates"
+    cp templates/vimrc.local.tmp "$test_root/repo/templates/vimrc.local.tmp"
+    mkdir "$test_root/repo/local"
+    printf 'first-install secret\n' > "$test_root/home/.secrets"
+    ln -s missing-aliases "$test_root/repo/local/aliases.local"
+    mkdir "$test_root/repo/local/zshrc.local"
+    ln "$test_root/home/.secrets" "$test_root/repo/local/zshenv.local"
+    ln -s "$test_root/home/.secrets" "$test_root/repo/local/gitconfig.local"
+
+    (
+      cd "$test_root/repo"
+      HOME="$test_root/home" ruby -rrake -e "load 'Rakefile'; prepare_local_files; install_local_files"
+    )
+
+    for name in aliases.local zshrc.local zshenv.local plugins.vim.local tmux.conf.local gitconfig.local; do
+      test -f "$test_root/repo/local/$name"
+      test ! -L "$test_root/repo/local/$name"
+      test ! -s "$test_root/repo/local/$name"
+      test -L "$test_root/home/.$name"
+    done
+    test -L "$test_root/repo/local/aliases.local.bkp"
+    test "$(readlink "$test_root/repo/local/aliases.local.bkp")" = missing-aliases
+    test -d "$test_root/repo/local/zshrc.local.bkp"
+    test "$(cat "$test_root/home/.secrets")" = 'first-install secret'
+    test ! -e "$test_root/repo/local/zshenv.local.bkp"
+    test ! -L "$test_root/repo/local/zshenv.local.bkp"
+    test ! -e "$test_root/repo/local/gitconfig.local.bkp"
+    test ! -L "$test_root/repo/local/gitconfig.local.bkp"
+    cmp "$test_root/repo/templates/vimrc.local.tmp" "$test_root/repo/local/vimrc.local"
+    test -L "$test_root/home/.vimrc.local"
+    ;;
   *)
-    echo "Usage: $0 prepare|verify|copy-failure" >&2
+    echo "Usage: $0 prepare|verify|copy-failure|first-install" >&2
     exit 2
     ;;
 esac

@@ -79,8 +79,34 @@ def prepare_local_files
     migrate_local_file(target, source)
   end
 
-  vimrc_local = 'local/vimrc.local'
-  FileUtils.cp('templates/vimrc.local.tmp', vimrc_local) unless File.exist?(vimrc_local)
+  LOCAL_FILE_NAMES.each do |name|
+    path = "local/#{name}"
+    template = name == 'vimrc.local' ? 'templates/vimrc.local.tmp' : nil
+    ensure_regular_local_file(path, template)
+  end
+end
+
+def ensure_regular_local_file(path, template)
+  if secrets_file?(path)
+    puts "Removing local alias to #{File.join(ENV['HOME'], '.secrets')}: #{path}"
+    FileUtils.rm(path)
+  end
+
+  return if File.file?(path) && !File.symlink?(path)
+
+  if File.symlink?(path) && File.exist?(path) && !secrets_file?(path)
+    puts "Replacing local symlink with a verified regular file: #{path}"
+    copy_local_file_safely(path, path)
+    return
+  end
+
+  if File.exist?(path) || File.symlink?(path)
+    backup = available_backup_path(path)
+    puts "Moving invalid local entry #{path} to #{backup}"
+    FileUtils.mv(path, backup)
+  end
+
+  template ? FileUtils.cp(template, path) : FileUtils.touch(path)
 end
 
 def migrate_local_file(target, source)

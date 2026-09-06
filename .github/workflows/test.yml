@@ -19,6 +19,8 @@ jobs:
         run: tests/test_local_install.sh verify
       - name: Verify failed local-file copy is safe
         run: tests/test_local_install.sh copy-failure
+      - name: Verify clean first install creates every local file
+        run: tests/test_local_install.sh first-install
       - name: Verify mise
         run: |
           eval "$(~/.local/bin/mise activate bash)"
@@ -46,6 +48,8 @@ jobs:
         run: tests/test_local_install.sh verify
       - name: Verify failed local-file copy is safe
         run: tests/test_local_install.sh copy-failure
+      - name: Verify clean first install creates every local file
+        run: tests/test_local_install.sh first-install
       - name: Verify mise
         run: |
           eval "$(~/.local/bin/mise activate bash)"

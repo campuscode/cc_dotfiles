@@ -66,7 +66,7 @@ Every config file sources a `.local` counterpart if present. Place your personal
 | `~/.gitconfig.local` | Git user name, email, and overrides |
 | `~/.secrets` | API keys and tokens (not tracked by git) |
 
-To keep personal overrides on your own branch, add them under `local/`. Running
+Personal overrides are stored under the Git-ignored `local/` directory. Running
 `rake install` links each `local/<name>` to `~/.<name>`:
 
 ```text
@@ -84,13 +84,21 @@ already point to the corresponding `local/` file are left unchanged. Other
 valid symlinks are imported and backed up; broken symlinks are reported and
 left untouched because their contents cannot be copied.
 
+All seven allowed files are guaranteed to exist under `local/` after
+installation. Missing files are created empty, except `local/vimrc.local`,
+which is initialized from the existing Vim template. An invalid entry already
+using one of these paths, such as a directory or broken symlink, is preserved
+under the next available backup name before the regular file is created.
+
 Only the seven `*.local` files listed above are migrated automatically.
 `~/.secrets` is never copied into the repository, including through a symlink
-or hardlink bearing an allowed local-file name.
+or hardlink bearing an allowed local-file name. An existing alias to
+`~/.secrets` inside `local/` is removed without creating another repository
+copy; the original secret file remains untouched.
 
-The tracked `local/.keep` keeps the directory available on branches without
-personal files. Other entries under `local/` are ignored unless their names
-appear in the allowlist above.
+The tracked `local/.keep` keeps the directory available after cloning. All
+other entries under `local/` are excluded from Git, and the installer ignores
+their names unless they appear in the allowlist above.
 
 ## Key conventions
 

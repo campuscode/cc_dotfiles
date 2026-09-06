@@ -2,3 +2,5 @@ vim/bundle/
 .DS_Store
 vim/backups
 .vagrant
+local/*
+!local/.keep
