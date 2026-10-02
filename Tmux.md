@@ -57,7 +57,7 @@ Send the same input to all panes in a window — useful for running the same com
 
 ## Copy Mode
 
-Enter copy mode with `C-a C-[`. Uses vi keybindings.
+Enter copy mode with `C-a [`. Uses vi keybindings.
 
 | Key | Action |
 |---|---|
